@@ -395,88 +395,53 @@ let networthChartInst=null,habitChartInst=null;
 // ===== STORAGE =====
 // ===== STORAGE =====
 const SAVE_KEY='lifedash_v3';
-const BACKUP_KEY='lifedash_v3_backup';
+const BACKUP_KEY='lifedash_v3_bak';
 let saveTimer=null;
-let storageReady=false;
 
 function showSaveBadge(msg,persist){
   let b=document.getElementById('save-badge');
-  if(!b){b=document.createElement('div');b.id='save-badge';b.style.cssText='position:fixed;bottom:16px;right:16px;background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--muted);z-index:9999;transition:opacity 0.5s';document.body.appendChild(b);}
+  if(!b){
+    b=document.createElement('div');b.id='save-badge';
+    b.style.cssText='position:fixed;bottom:16px;right:16px;background:#fff;border:1px solid #ccc;border-radius:8px;padding:6px 14px;font-size:12px;color:#666;z-index:9999;transition:opacity 0.5s;pointer-events:none';
+    document.body.appendChild(b);
+  }
   b.style.opacity='1';b.textContent=msg;
   clearTimeout(b._t);
   if(!persist)b._t=setTimeout(()=>{b.style.opacity='0';},2000);
 }
 
-async function persistSave(payload){
-  // Try window.storage first
-  if(window.storage){
-    try{await window.storage.set(SAVE_KEY,payload);storageReady=true;return true;}catch(e){console.warn('window.storage write failed',e);}
-  }
-  return false;
-}
-
-function memorySave(payload){
-  // Always keep an in-memory mirror so data survives within the session
-  try{window._lifeDashSnapshot=payload;}catch(e){}
-}
-
 function save(){
   clearTimeout(saveTimer);
-  saveTimer=setTimeout(async()=>{
+  saveTimer=setTimeout(()=>{
     try{
       const payload=JSON.stringify(S);
-      memorySave(payload);
-      const ok=await persistSave(payload);
-      showSaveBadge(ok?'Saved ✓':'Saved (session only)');
-    }catch(e){console.warn('Save error',e);}
+      localStorage.setItem(SAVE_KEY,payload);
+      showSaveBadge('Saved ✓');
+    }catch(e){
+      showSaveBadge('Save failed ⚠️');
+      console.warn('Save error',e);
+    }
   },300);
 }
 
-// Auto-backup every 3 minutes
-setInterval(async()=>{
-  try{
-    const payload=JSON.stringify(S);
-    if(window.storage&&storageReady){
-      await window.storage.set(BACKUP_KEY,payload);
-    }
-  }catch(e){}
+setInterval(()=>{
+  try{localStorage.setItem(BACKUP_KEY,JSON.stringify(S));}catch(e){}
 },180000);
 
-async function load(){
-  showSaveBadge('Restoring data…',true);
+function load(){
+  showSaveBadge('Restoring…',true);
   let raw=null;
-
-  // 1. Try primary window.storage key
-  if(window.storage){
-    try{
-      const r=await window.storage.get(SAVE_KEY);
-      if(r&&r.value){raw=r.value;storageReady=true;}
-    }catch(e){console.warn('Primary load failed',e);}
-  }
-
-  // 2. Try backup key if primary empty
-  if(!raw&&window.storage){
-    try{
-      const r=await window.storage.get(BACKUP_KEY);
-      if(r&&r.value){raw=r.value;storageReady=true;console.info('Restored from backup');}
-    }catch(e){}
-  }
-
-  // 3. Try in-memory snapshot (survives soft reloads within same tab)
-  if(!raw&&window._lifeDashSnapshot){
-    raw=window._lifeDashSnapshot;
-  }
-
+  try{raw=localStorage.getItem(SAVE_KEY);}catch(e){}
+  if(!raw){try{raw=localStorage.getItem(BACKUP_KEY);}catch(e){}}
   if(raw){
     try{
       const d=JSON.parse(raw);
       Object.keys(d).forEach(k=>{if(k in S)S[k]=d[k];});
-      showSaveBadge('Data restored ✓');
-    }catch(e){showSaveBadge('Restore error — starting fresh');}
+      showSaveBadge('Restored ✓');
+    }catch(e){showSaveBadge('Fresh start');}
   }else{
-    showSaveBadge('No saved data yet');
+    showSaveBadge('Welcome!');
   }
-
   document.getElementById('qt-date').value=today();
   document.getElementById('qt2-date').value=today();
   document.getElementById('hab-start').value=today();
@@ -484,13 +449,6 @@ async function load(){
   populateCatSelects();populateAccSelects();
   updateCalLayerButtons();
   renderAll();
-
-  // Write immediately on load to confirm storage is writable
-  if(raw){
-    try{
-      if(window.storage)await window.storage.set(SAVE_KEY,raw);
-    }catch(e){}
-  }
 }
 
 // ===== UTILS =====

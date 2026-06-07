@@ -996,5 +996,12 @@ function renderDashboard(){
 function renderAll(){renderDashboard();renderFinance();renderTransactions();renderSubscriptions();renderCalendar();renderHabits();renderTodos();}
 load();
 </script>
+  <script>
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/life-dashboard/sw.js')
+      .then(()=>console.log('SW registered'))
+      .catch(e=>console.warn('SW failed',e));
+  }
+</script>
 </body>
 </html>

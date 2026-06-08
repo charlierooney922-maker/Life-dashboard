@@ -1121,7 +1121,7 @@ function applyTheme(name){
 function setTheme(name){applyTheme(name);save();}
 
 // ===== UTILS =====
-function today(){return new Date().toISOString().slice(0,10);}
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 function fmtGBP(n){return'£'+Number(n).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fmtGBP0(n){return'£'+Number(n).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});}
@@ -1620,7 +1620,18 @@ function renderMood(){
 // ===== HABITS =====
 function isScheduled(h,dateStr){if(h.start&&dateStr<h.start)return false;const dow=new Date(dateStr+'T12:00:00').getDay();return!h.days||h.days.length===0||h.days.includes(dow);}
 function getStreak(habitId){const h=S.habits.find(x=>x.id===habitId);if(!h)return 0;const logs=S.habitLogs[habitId]||{};let streak=0;let d=new Date();for(let i=0;i<365;i++){const key=d.toISOString().slice(0,10);if(!isScheduled(h,key)){d.setDate(d.getDate()-1);continue;}if(logs[key])streak++;else break;d.setDate(d.getDate()-1);}return streak;}
-function getWeekDates(){const dates=[];const d=new Date();for(let i=6;i>=0;i--){const x=new Date(d);x.setDate(d.getDate()-i);dates.push(x.toISOString().slice(0,10));}return dates;}
+function getWeekDates(){
+  const dates=[];const now=new Date();
+  for(let i=6;i>=0;i--){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    dates.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));
+  }
+  return dates;
+}
+function getDayLabel(dateStr){
+  const d=new Date(dateStr+'T12:00:00');
+  return['Su','Mo','Tu','We','Th','Fr','Sa'][d.getDay()];
+}
 function toggleHabit(habitId,date){if(!S.habitLogs[habitId])S.habitLogs[habitId]={};S.habitLogs[habitId][date]=!S.habitLogs[habitId][date];save();renderHabits();renderDashboard();}
 function saveHabit(){
   const name=document.getElementById('hab-name').value.trim();if(!name)return;
@@ -1650,7 +1661,7 @@ function renderHabits(){
   listEl.innerHTML=`<div>
     <div style="display:grid;grid-template-columns:160px 1fr 80px 32px;gap:6px;padding:4px 0;border-bottom:0.5px solid var(--border)">
       <div style="font-size:11px;color:var(--muted)">Habit</div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:10px;color:var(--muted);text-align:center">${weekDates.map((d,i)=>`<div>${d.slice(8)}<br>${dl[i]}</div>`).join('')}</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:10px;color:var(--muted);text-align:center">${weekDates.map(d=>`<div>${d.slice(8)}<br>${getDayLabel(d)}</div>`).join('')}</div>
       <div style="font-size:11px;color:var(--muted);text-align:center">Streak</div><div></div>
     </div>
     ${S.habits.map(h=>{const streak=getStreak(h.id);
@@ -1683,7 +1694,7 @@ function renderHabits(){
   </tr>`).join('')}</tbody></table></div>`;
 
   const dayTotals=weekDates.map(d=>S.habits.filter(h=>isScheduled(h,d)&&(S.habitLogs[h.id]||{})[d]).length);
-  mkChart('habitWeekChart','bar',{labels:dl,datasets:[{label:'Done',data:dayTotals,backgroundColor:'#f97316',borderRadius:6,maxBarThickness:32}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:Math.max(S.habits.length,1),ticks:{stepSize:1,color:'#6b6b88'},grid:{color:'rgba(255,255,255,0.04)'}},x:{ticks:{color:'#6b6b88'},grid:{display:false}}}});
+  mkChart('habitWeekChart','bar',{labels:weekDates.map(d=>getDayLabel(d)),datasets:[{label:'Done',data:dayTotals,backgroundColor:'#f97316',borderRadius:6,maxBarThickness:32}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:Math.max(S.habits.length,1),ticks:{stepSize:1,color:'#6b6b88'},grid:{color:'rgba(255,255,255,0.04)'}},x:{ticks:{color:'#6b6b88'},grid:{display:false}}}});
   const tEl=document.getElementById('habit-table');if(!tEl)return;
   tEl.innerHTML=`<table><thead><tr><th>Habit</th><th>This week</th><th>Streak</th></tr></thead><tbody>
   ${S.habits.map(h=>{const sc=weekDates.filter(d=>isScheduled(h,d)).length;const done=weekDates.filter(d=>isScheduled(h,d)&&(S.habitLogs[h.id]||{})[d]).length;const pct=sc?Math.round(done/sc*100):0;const s=getStreak(h.id);

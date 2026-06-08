@@ -19,8 +19,7 @@
   --text:#0a1940;--muted:#4a6080;--accent:#0f3460;--accent-light:#dce8f5;
   --green:#1a6b3c;--green-light:#d8f0e4;--amber:#9a6400;--amber-light:#fdf0cc;
   --red:#a0202a;--red-light:#fce8ea;--blue:#0f3460;--blue-light:#dce8f5;
-  --teal:#0a5c6e;--teal-light:#d4eff4;--radius:12px;--radius-lg:16px;
-  --nav-h:64px;
+  --teal:#0a5c6e;--teal-light:#d4eff4;--radius:12px;--radius-lg:16px;--nav-h:64px;
 }
 [data-theme="purple"]{--accent:#534AB7;--accent-light:#EEEDFE;--bg:#f8f7ff;--text:#1a1040;--muted:#6b5b95;--border:rgba(83,74,183,0.12)}
 [data-theme="forest"]{--accent:#2d6a4f;--accent-light:#d8f3dc;--bg:#f0f7f1;--text:#1b2d22;--muted:#52796f;--border:rgba(0,0,0,0.08)}
@@ -28,66 +27,51 @@
 [data-theme="dark"]{--bg:#0d1117;--surface:#161b22;--border:rgba(255,255,255,0.08);--text:#e6edf3;--muted:#7d8590;--accent:#4493f8;--accent-light:#1a2d4a}
 [data-theme="midnight"]{--bg:#070714;--surface:#0e0e2e;--border:rgba(255,255,255,0.07);--text:#e0e0ff;--muted:#8888bb;--accent:#7c6af7;--accent-light:#1a1660}
 [data-theme="slate"]{--accent:#475569;--accent-light:#f1f5f9;--bg:#f8fafc;--text:#0f172a;--muted:#64748b;--border:rgba(0,0,0,0.08)}
-
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;overflow-x:hidden}
 
-/* ===== LOCK SCREEN ===== */
-#lock-screen{position:fixed;inset:0;background:var(--accent);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity 0.5s,transform 0.5s}
-#lock-screen.hide{opacity:0;transform:scale(1.05);pointer-events:none}
-.lock-logo{font-size:48px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3))}
-.lock-title{color:#fff;font-size:22px;font-weight:600;letter-spacing:0.02em}
-.pin-dots{display:flex;gap:16px}
-.pin-dot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);background:transparent;transition:all 0.15s}
+/* LOCK */
+#lock-screen{position:fixed;inset:0;background:var(--accent);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.75rem}
+#lock-screen.hide{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity 0.5s,transform 0.5s}
+.lock-logo{font-size:48px}.lock-title{color:#fff;font-size:22px;font-weight:600}
+.pin-dots{display:flex;gap:14px}
+.pin-dot{width:15px;height:15px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);background:transparent;transition:all 0.15s}
 .pin-dot.filled{background:#fff;border-color:#fff}
-.pin-pad{display:grid;grid-template-columns:repeat(3,72px);gap:12px}
-.pin-btn{width:72px;height:72px;border-radius:50%;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:22px;font-weight:500;cursor:pointer;transition:all 0.1s;backdrop-filter:blur(4px)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,70px);gap:10px}
+.pin-btn{width:70px;height:70px;border-radius:50%;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:22px;font-weight:500;cursor:pointer;transition:all 0.1s}
 .pin-btn:active{background:rgba(255,255,255,0.35);transform:scale(0.93)}
 .pin-error{color:rgba(255,255,255,0.8);font-size:13px;min-height:20px;text-align:center}
-
-/* ===== GREETING ===== */
 #greeting-screen{position:fixed;inset:0;background:var(--accent);z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.4s}
-#greeting-screen.show{opacity:1}
-#greeting-screen.hide{opacity:0}
+#greeting-screen.show{opacity:1}#greeting-screen.hide{opacity:0}
 .greeting-lang{color:rgba(255,255,255,0.7);font-size:15px;font-style:italic}
-.greeting-text{color:#fff;font-size:36px;font-weight:700;text-align:center;padding:0 2rem}
+.greeting-text{color:#fff;font-size:34px;font-weight:700;text-align:center;padding:0 2rem}
 
-/* ===== LAYOUT ===== */
-.app{display:flex;min-height:100vh}
+/* LAYOUT */
 .sidebar{width:var(--sidebar);background:var(--surface);border-right:0.5px solid var(--border);padding:1.25rem 0.75rem;display:flex;flex-direction:column;gap:2px;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;transition:transform 0.3s}
-.main{margin-left:var(--sidebar);flex:1;padding:1.5rem;min-height:100vh;padding-bottom:calc(var(--nav-h) + 1rem)}
+.main{margin-left:var(--sidebar);flex:1;padding:1.5rem;min-height:100vh;padding-bottom:calc(var(--nav-h) + 1.5rem)}
 .page{display:none}.page.active{display:block}
-
-/* Sidebar items */
-.logo{font-size:15px;font-weight:600;padding:0.5rem 0.75rem 1rem;border-bottom:0.5px solid var(--border);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;color:var(--accent)}
+.logo{font-size:15px;font-weight:700;padding:0.5rem 0.75rem 1rem;border-bottom:0.5px solid var(--border);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px;color:var(--accent)}
 .logo i{font-size:22px}
 .nav-section{font-size:10px;color:var(--muted);padding:8px 12px 2px;letter-spacing:0.07em;text-transform:uppercase;margin-top:6px}
 .nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);transition:all 0.12s;border:none;background:none;width:100%;text-align:left;font-size:13px;font-weight:500}
 .nav-item:hover{color:var(--text)}
 .nav-item.active{background:var(--accent-light);color:var(--accent)}
-.nav-item i{font-size:18px;width:22px;flex-shrink:0}
-
-/* Mobile bottom nav */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:var(--surface);border-top:0.5px solid var(--border);z-index:100;padding:0 0.5rem;align-items:center;justify-content:space-around;padding-bottom:env(safe-area-inset-bottom)}
-.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);border:none;background:none;font-size:10px;font-weight:500;transition:all 0.12s;min-width:52px}
-.bnav-item i{font-size:22px}
-.bnav-item.active{color:var(--accent)}
+.nav-item i{font-size:17px;width:20px;flex-shrink:0}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:var(--surface);border-top:0.5px solid var(--border);z-index:100;padding:0 0.25rem;align-items:center;justify-content:space-around;padding-bottom:env(safe-area-inset-bottom)}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 8px;border-radius:10px;cursor:pointer;color:var(--muted);border:none;background:none;font-size:9px;font-weight:600;transition:all 0.12s;min-width:44px}
+.bnav-item i{font-size:22px}.bnav-item.active{color:var(--accent)}
 .menu-btn{display:none;position:fixed;top:1rem;left:1rem;z-index:101;background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:8px;cursor:pointer;color:var(--text)}
-
 @media(max-width:768px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
+  .sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}
   .main{margin-left:0;padding:1rem;padding-top:4rem;padding-bottom:calc(var(--nav-h) + 1rem)}
-  .bottom-nav{display:flex}
-  .menu-btn{display:flex}
+  .bottom-nav{display:flex}.menu-btn{display:flex}
   .grid-4{grid-template-columns:repeat(2,1fr)!important}
-  .grid-2{grid-template-columns:1fr!important}
-  .hide-mobile{display:none!important}
+  .grid-2,.grid-3{grid-template-columns:1fr!important}
   .quick-bar{flex-direction:column}
   .quick-bar .form-group{min-width:100%!important;max-width:100%!important;flex:none!important}
 }
 
-/* ===== COMPONENTS ===== */
-h1{font-size:20px;font-weight:600;margin-bottom:1.25rem}
+/* COMPONENTS */
+h1{font-size:20px;font-weight:700;margin-bottom:1.25rem}
 h2{font-size:17px;font-weight:600;margin-bottom:0.75rem}
 h3{font-size:14px;font-weight:600}
 .card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem}
@@ -95,23 +79,24 @@ h3{font-size:14px;font-weight:600}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .metric{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem}
-.metric-label{font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:0.04em}
-.metric-value{font-size:20px;font-weight:600}
+.metric-label{font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em}
+.metric-value{font-size:20px;font-weight:700}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-green{background:var(--green-light);color:var(--green)}
-.badge-amber{background:var(--amber-light);color:var(--amber)}
-.badge-red{background:var(--red-light);color:var(--red)}
-.badge-accent{background:var(--accent-light);color:var(--accent)}
-.badge-blue{background:var(--blue-light);color:var(--blue)}
-.badge-teal{background:var(--teal-light);color:var(--teal)}
-button.btn{background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:7px 14px;cursor:pointer;font-size:13px;color:var(--text);display:inline-flex;align-items:center;gap:6px;transition:background 0.12s;font-weight:500}
+.badge-green{background:var(--green-light);color:var(--green)}.badge-amber{background:var(--amber-light);color:var(--amber)}
+.badge-red{background:var(--red-light);color:var(--red)}.badge-accent{background:var(--accent-light);color:var(--accent)}
+.badge-blue{background:var(--blue-light);color:var(--blue)}.badge-teal{background:var(--teal-light);color:var(--teal)}
+button.btn{background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:8px 14px;cursor:pointer;font-size:13px;color:var(--text);display:inline-flex;align-items:center;gap:6px;font-weight:500;height:38px}
 button.btn-accent{background:var(--accent);color:#fff;border-color:var(--accent)}
 button.btn-danger{background:var(--red-light);color:var(--red);border-color:transparent}
-button.btn-sm{padding:4px 9px;font-size:12px}
-input[type=text],input[type=number],input[type=date],input[type=url],input[type=password],select,textarea{background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:8px 12px;font-size:13px;color:var(--text);width:100%;outline:none;font-family:inherit;transition:border-color 0.12s}
+button.btn-sm{padding:4px 9px;font-size:12px;height:30px}
+button.btn-xs{padding:2px 7px;font-size:11px;height:24px}
+input[type=text],input[type=number],input[type=date],input[type=url],input[type=password],input[type=time],select,textarea{
+  background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:8px 12px;font-size:13px;color:var(--text);width:100%;outline:none;font-family:inherit;height:38px}
+textarea{height:auto}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 .progress-bar{height:7px;background:var(--bg);border-radius:4px;overflow:hidden;margin-top:5px}
 .progress-fill{height:100%;border-radius:4px;background:var(--accent);transition:width 0.4s}
+.progress-fill.over{background:var(--red)}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;padding:8px 10px;color:var(--muted);font-weight:600;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.04em}
@@ -119,8 +104,8 @@ td{padding:9px 10px;border-bottom:0.5px solid var(--border);vertical-align:middl
 tr:last-child td{border-bottom:none}
 .empty-state{text-align:center;padding:2.5rem;color:var(--muted)}
 .empty-state i{font-size:36px;margin-bottom:0.75rem;display:block;opacity:0.3}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:flex;align-items:flex-end;justify-content:center;padding:0}
-.modal{background:var(--surface);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:1.5rem;width:100%;max-width:520px;border:0.5px solid var(--border);max-height:90vh;overflow-y:auto;animation:slideUp 0.25s ease}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:flex;align-items:flex-end;justify-content:center}
+.modal{background:var(--surface);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:1.5rem;width:100%;max-width:560px;border:0.5px solid var(--border);max-height:90vh;overflow-y:auto;animation:slideUp 0.25s ease}
 @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 1.25rem}
 .modal h3{margin-bottom:1rem;font-size:16px}
@@ -143,32 +128,26 @@ tr:last-child td{border-bottom:none}
 .todo-item:last-child{border-bottom:none}
 .todo-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
 .todo-check.done{background:var(--green);border-color:var(--green);color:#fff}
-.todo-text.done{text-decoration:line-through;color:var(--muted)}
-/* Shake animation for long-press edit */
-@keyframes shake{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
-.shaking{animation:shake 0.3s infinite}
-/* Habit compact grid */
-.hab-mini-dot{border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;cursor:pointer;border:0.5px solid var(--border);background:var(--bg);transition:all 0.1s}
-.hab-mini-dot.done{color:#fff}
-/* Achievement card */
-.ach-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;gap:12px;align-items:flex-start}
-.ach-icon{font-size:28px;flex-shrink:0}
-/* Link card */
+#save-badge{position:fixed;bottom:calc(var(--nav-h) + 12px);right:16px;background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:5px 12px;font-size:12px;color:var(--muted);z-index:9999;transition:opacity 0.5s;pointer-events:none;font-weight:500}
+.theme-swatch{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all 0.15s}
+.theme-swatch.active{border-color:var(--text)}
 .link-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:0.9rem 1rem;display:flex;align-items:center;gap:10px;cursor:pointer;transition:border-color 0.12s;text-decoration:none;color:var(--text)}
 .link-card:hover{border-color:var(--accent)}
-/* Theme picker */
-.theme-swatch{width:36px;height:36px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all 0.15s;flex-shrink:0}
-.theme-swatch.active{border-color:var(--text)}
-/* Settings */
-.settings-row{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 0;border-bottom:0.5px solid var(--border)}
-.settings-row:last-child{border-bottom:none}
-/* Save badge */
-#save-badge{position:fixed;bottom:calc(var(--nav-h) + 12px);right:16px;background:var(--surface);border:0.5px solid var(--border);border-radius:9px;padding:5px 12px;font-size:12px;color:var(--muted);z-index:9999;transition:opacity 0.5s;pointer-events:none;font-weight:500}
+.ach-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem;display:flex;gap:12px;align-items:flex-start;margin-bottom:0.75rem}
+/* Workout */
+.workout-exercise{background:var(--bg);border-radius:var(--radius);padding:0.75rem;margin-bottom:0.5rem}
+.set-row{display:flex;gap:6px;align-items:center;margin-top:6px}
+/* Metric mood */
+.mood-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--border);background:var(--bg);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.mood-btn.selected{border-color:var(--accent);background:var(--accent-light)}
+/* Budget */
+.budget-item{padding:0.75rem 0;border-bottom:0.5px solid var(--border)}
+.budget-item:last-child{border-bottom:none}
 </style>
 </head>
 <body>
 
-<!-- LOCK SCREEN -->
+<!-- LOCK -->
 <div id="lock-screen">
   <div class="lock-logo">🔒</div>
   <div class="lock-title">My Life</div>
@@ -181,43 +160,48 @@ tr:last-child td{border-bottom:none}
     <button class="pin-btn" onclick="pinPress(1)">1</button><button class="pin-btn" onclick="pinPress(2)">2</button><button class="pin-btn" onclick="pinPress(3)">3</button>
     <button class="pin-btn" onclick="pinPress(4)">4</button><button class="pin-btn" onclick="pinPress(5)">5</button><button class="pin-btn" onclick="pinPress(6)">6</button>
     <button class="pin-btn" onclick="pinPress(7)">7</button><button class="pin-btn" onclick="pinPress(8)">8</button><button class="pin-btn" onclick="pinPress(9)">9</button>
-    <button class="pin-btn" onclick="pinClear()" style="font-size:14px">Clear</button><button class="pin-btn" onclick="pinPress(0)">0</button><button class="pin-btn" onclick="pinBack()">⌫</button>
+    <button class="pin-btn" onclick="pinClear()" style="font-size:13px">Clear</button><button class="pin-btn" onclick="pinPress(0)">0</button><button class="pin-btn" onclick="pinBack()">⌫</button>
   </div>
   <div class="pin-error" id="pin-error"></div>
 </div>
-
-<!-- GREETING -->
 <div id="greeting-screen">
   <div class="greeting-lang" id="greeting-lang"></div>
   <div class="greeting-text" id="greeting-text"></div>
 </div>
 
-<!-- MENU BUTTON (mobile) -->
-<button class="menu-btn" onclick="toggleSidebar()" id="menu-btn"><i class="ti ti-menu-2" style="font-size:20px"></i></button>
+<button class="menu-btn" onclick="toggleSidebar()"><i class="ti ti-menu-2" style="font-size:20px"></i></button>
 
-<!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="logo"><i class="ti ti-layout-dashboard"></i>My Life</div>
   <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard',this)"><i class="ti ti-home"></i>Dashboard</button>
   <div class="nav-section">Money</div>
   <button class="nav-item" data-page="finance" onclick="showPage('finance',this)"><i class="ti ti-wallet"></i>Financials</button>
   <button class="nav-item" data-page="transactions" onclick="showPage('transactions',this)"><i class="ti ti-arrows-exchange"></i>Transactions</button>
+  <button class="nav-item" data-page="budget" onclick="showPage('budget',this)"><i class="ti ti-chart-pie"></i>Budget</button>
+  <button class="nav-item" data-page="debt" onclick="showPage('debt',this)"><i class="ti ti-credit-card"></i>Debt tracker</button>
+  <button class="nav-item" data-page="bills" onclick="showPage('bills',this)"><i class="ti ti-receipt"></i>Bill reminders</button>
   <button class="nav-item" data-page="subscriptions" onclick="showPage('subscriptions',this)"><i class="ti ti-refresh"></i>Subscriptions</button>
+  <div class="nav-section">Health</div>
+  <button class="nav-item" data-page="health" onclick="showPage('health',this)"><i class="ti ti-heart-rate-monitor"></i>Health metrics</button>
+  <button class="nav-item" data-page="workouts" onclick="showPage('workouts',this)"><i class="ti ti-barbell"></i>Workouts</button>
+  <button class="nav-item" data-page="mood" onclick="showPage('mood',this)"><i class="ti ti-mood-smile"></i>Mood tracker</button>
   <div class="nav-section">Lifestyle</div>
   <button class="nav-item" data-page="habits" onclick="showPage('habits',this)"><i class="ti ti-repeat"></i>Habits</button>
   <button class="nav-item" data-page="todos" onclick="showPage('todos',this)"><i class="ti ti-checkbox"></i>To-Do Lists</button>
+  <button class="nav-item" data-page="goals" onclick="showPage('goals',this)"><i class="ti ti-target"></i>Life goals</button>
+  <button class="nav-item" data-page="review" onclick="showPage('review',this)"><i class="ti ti-notebook"></i>Weekly review</button>
+  <button class="nav-item" data-page="notes" onclick="showPage('notes',this)"><i class="ti ti-notes"></i>Notes</button>
   <button class="nav-item" data-page="achievements" onclick="showPage('achievements',this)"><i class="ti ti-trophy"></i>Achievements</button>
-  <button class="nav-item" data-page="links" onclick="showPage('links',this)"><i class="ti ti-link"></i>Important Links</button>
+  <button class="nav-item" data-page="links" onclick="showPage('links',this)"><i class="ti ti-link"></i>Links</button>
   <div class="nav-section">System</div>
   <button class="nav-item" data-page="settings" onclick="showPage('settings',this)"><i class="ti ti-settings"></i>Settings</button>
 </nav>
 
-<!-- BOTTOM NAV (mobile) -->
 <div class="bottom-nav">
   <button class="bnav-item active" data-page="dashboard" onclick="showPage('dashboard',this)"><i class="ti ti-home"></i>Home</button>
   <button class="bnav-item" data-page="finance" onclick="showPage('finance',this)"><i class="ti ti-wallet"></i>Finance</button>
+  <button class="bnav-item" data-page="health" onclick="showPage('health',this)"><i class="ti ti-heart-rate-monitor"></i>Health</button>
   <button class="bnav-item" data-page="habits" onclick="showPage('habits',this)"><i class="ti ti-repeat"></i>Habits</button>
-  <button class="bnav-item" data-page="todos" onclick="showPage('todos',this)"><i class="ti ti-checkbox"></i>Tasks</button>
   <button class="bnav-item" data-page="settings" onclick="showPage('settings',this)"><i class="ti ti-dots"></i>More</button>
 </div>
 
@@ -242,12 +226,13 @@ tr:last-child td{border-bottom:none}
   <h1>Financials</h1>
   <div class="quick-bar">
     <div class="form-group" style="max-width:110px"><label>Amount £</label><input type="number" id="qt-amount" placeholder="0.00" step="0.01"></div>
-    <div class="form-group" style="max-width:100px"><label>Type</label><select id="qt-type" onchange="updateQT('qt')"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
+    <div class="form-group" style="max-width:105px"><label>Type</label><select id="qt-type" onchange="updateQT('qt')"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
     <div class="form-group" style="flex:1.5"><label>Account</label><select id="qt-account"></select></div>
     <div class="form-group" id="qt-to-group" style="flex:1.5;display:none"><label>To account</label><select id="qt-to-account"></select></div>
     <div class="form-group" style="flex:2"><label>Description</label><input type="text" id="qt-desc" placeholder="e.g. Tesco"></div>
     <div class="form-group" style="max-width:130px"><label>Date</label><input type="date" id="qt-date"></div>
-    <div class="form-group" style="max-width:120px"><label>Category</label><select id="qt-cat"></select></div>
+    <div class="form-group" style="max-width:130px"><label>Category</label><select id="qt-cat" onchange="checkOtherCat('qt')"></select></div>
+    <div class="form-group" id="qt-other-group" style="max-width:130px;display:none"><label>Custom name</label><input type="text" id="qt-other-name" placeholder="Category name"></div>
     <button class="btn btn-accent" onclick="doAddTx('qt')"><i class="ti ti-plus"></i>Add</button>
   </div>
   <div class="grid-4" style="margin-bottom:1rem">
@@ -261,7 +246,7 @@ tr:last-child td{border-bottom:none}
     <button class="tab" onclick="setFinTab('accounts',this)">Accounts</button>
     <button class="tab" onclick="setFinTab('savings',this)">Savings</button>
     <button class="tab" onclick="setFinTab('investments',this)">Investments</button>
-    <button class="tab" onclick="setFinTab('goals',this)">Goals</button>
+    <button class="tab" onclick="setFinTab('goals',this)">Savings goals</button>
   </div>
   <div id="fin-tab-content"></div>
 </div>
@@ -271,24 +256,68 @@ tr:last-child td{border-bottom:none}
   <h1>Transactions</h1>
   <div class="quick-bar">
     <div class="form-group" style="max-width:110px"><label>Amount £</label><input type="number" id="qt2-amount" placeholder="0.00" step="0.01"></div>
-    <div class="form-group" style="max-width:100px"><label>Type</label><select id="qt2-type" onchange="updateQT('qt2')"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
+    <div class="form-group" style="max-width:105px"><label>Type</label><select id="qt2-type" onchange="updateQT('qt2')"><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select></div>
     <div class="form-group" style="flex:1.5"><label>Account</label><select id="qt2-account"></select></div>
     <div class="form-group" id="qt2-to-group" style="flex:1.5;display:none"><label>To account</label><select id="qt2-to-account"></select></div>
     <div class="form-group" style="flex:2"><label>Description</label><input type="text" id="qt2-desc" placeholder="e.g. Tesco"></div>
     <div class="form-group" style="max-width:130px"><label>Date</label><input type="date" id="qt2-date"></div>
-    <div class="form-group" style="max-width:120px"><label>Category</label><select id="qt2-cat"></select></div>
+    <div class="form-group" style="max-width:130px"><label>Category</label><select id="qt2-cat" onchange="checkOtherCat('qt2')"></select></div>
+    <div class="form-group" id="qt2-other-group" style="max-width:130px;display:none"><label>Custom name</label><input type="text" id="qt2-other-name" placeholder="Category name"></div>
     <button class="btn btn-accent" onclick="doAddTx('qt2')"><i class="ti ti-plus"></i>Add</button>
   </div>
   <div class="card">
     <div class="section-header">
       <h3>All transactions</h3>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <select id="tx-filter-type" onchange="renderTransactions()" style="width:auto"><option value="">All types</option><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select>
-        <select id="tx-filter-cat" onchange="renderTransactions()" style="width:auto"><option value="">All categories</option></select>
-        <select id="tx-filter-acc" onchange="renderTransactions()" style="width:auto"><option value="">All accounts</option></select>
+        <select id="tx-filter-type" onchange="renderTransactions()" style="width:auto;height:38px"><option value="">All types</option><option value="expense">Expense</option><option value="income">Income</option><option value="transfer">Transfer</option></select>
+        <select id="tx-filter-cat" onchange="renderTransactions()" style="width:auto;height:38px"><option value="">All categories</option></select>
+        <select id="tx-filter-acc" onchange="renderTransactions()" style="width:auto;height:38px"><option value="">All accounts</option></select>
       </div>
     </div>
     <div id="tx-list"></div>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div id="page-budget" class="page">
+  <h1>Budget</h1>
+  <div class="grid-4" style="margin-bottom:1rem">
+    <div class="metric"><div class="metric-label">Total budget</div><div class="metric-value" id="bud-total">£0</div></div>
+    <div class="metric"><div class="metric-label">Spent</div><div class="metric-value" id="bud-spent">£0</div></div>
+    <div class="metric"><div class="metric-label">Remaining</div><div class="metric-value" id="bud-remaining">£0</div></div>
+    <div class="metric"><div class="metric-label">Over budget</div><div class="metric-value" id="bud-over">0</div></div>
+  </div>
+  <div class="card">
+    <div class="section-header"><h3>Monthly budgets</h3><button class="btn btn-accent" onclick="openModal('budgetModal')"><i class="ti ti-plus"></i>Add budget</button></div>
+    <div id="budget-list"></div>
+  </div>
+</div>
+
+<!-- DEBT -->
+<div id="page-debt" class="page">
+  <h1>Debt tracker</h1>
+  <div class="grid-3" style="margin-bottom:1rem">
+    <div class="metric"><div class="metric-label">Total debt</div><div class="metric-value" id="debt-total">£0</div></div>
+    <div class="metric"><div class="metric-label">Monthly payments</div><div class="metric-value" id="debt-monthly">£0</div></div>
+    <div class="metric"><div class="metric-label">Debts tracked</div><div class="metric-value" id="debt-count">0</div></div>
+  </div>
+  <div class="card">
+    <div class="section-header"><h3>My debts</h3><button class="btn btn-accent" onclick="openModal('debtModal')"><i class="ti ti-plus"></i>Add debt</button></div>
+    <div id="debt-list"></div>
+  </div>
+</div>
+
+<!-- BILLS -->
+<div id="page-bills" class="page">
+  <h1>Bill reminders</h1>
+  <div class="grid-3" style="margin-bottom:1rem">
+    <div class="metric"><div class="metric-label">Due this month</div><div class="metric-value" id="bill-due">0</div></div>
+    <div class="metric"><div class="metric-label">Total this month</div><div class="metric-value" id="bill-total">£0</div></div>
+    <div class="metric"><div class="metric-label">Overdue</div><div class="metric-value" id="bill-overdue">0</div></div>
+  </div>
+  <div class="card">
+    <div class="section-header"><h3>Upcoming bills</h3><button class="btn btn-accent" onclick="openModal('billModal')"><i class="ti ti-plus"></i>Add bill</button></div>
+    <div id="bill-list"></div>
   </div>
 </div>
 
@@ -304,6 +333,63 @@ tr:last-child td{border-bottom:none}
   <div class="card">
     <div class="section-header"><h3>My subscriptions</h3><button class="btn btn-accent" onclick="openModal('subModal')"><i class="ti ti-plus"></i>Add</button></div>
     <div id="sub-list"></div>
+  </div>
+</div>
+
+<!-- HEALTH -->
+<div id="page-health" class="page">
+  <h1>Health metrics</h1>
+  <div class="quick-bar" style="flex-wrap:wrap">
+    <div class="form-group" style="max-width:110px"><label>Date</label><input type="date" id="hm-date"></div>
+    <div class="form-group" style="max-width:100px"><label>Weight (kg)</label><input type="number" id="hm-weight" placeholder="75" step="0.1"></div>
+    <div class="form-group" style="max-width:110px"><label>Sleep (hrs)</label><input type="number" id="hm-sleep" placeholder="8" step="0.5"></div>
+    <div class="form-group" style="max-width:110px"><label>Water (glasses)</label><input type="number" id="hm-water" placeholder="8"></div>
+    <div class="form-group" style="max-width:110px"><label>Resting HR</label><input type="number" id="hm-hr" placeholder="65"></div>
+    <div class="form-group" style="max-width:110px"><label>Steps</label><input type="number" id="hm-steps" placeholder="8000"></div>
+    <button class="btn btn-accent" onclick="saveHealthMetric()"><i class="ti ti-plus"></i>Log</button>
+  </div>
+  <div class="grid-4" style="margin-bottom:1rem">
+    <div class="metric"><div class="metric-label">Latest weight</div><div class="metric-value" id="hm-latest-weight">—</div></div>
+    <div class="metric"><div class="metric-label">Avg sleep</div><div class="metric-value" id="hm-avg-sleep">—</div></div>
+    <div class="metric"><div class="metric-label">Avg water</div><div class="metric-value" id="hm-avg-water">—</div></div>
+    <div class="metric"><div class="metric-label">Avg HR</div><div class="metric-value" id="hm-avg-hr">—</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h3 style="margin-bottom:0.75rem">Weight trend</h3><div style="position:relative;height:180px"><canvas id="weightChart"></canvas></div></div>
+    <div class="card"><h3 style="margin-bottom:0.75rem">Sleep trend</h3><div style="position:relative;height:180px"><canvas id="sleepChart"></canvas></div></div>
+  </div>
+  <div class="card"><h3 style="margin-bottom:0.75rem">Log history</h3><div id="hm-log"></div></div>
+</div>
+
+<!-- WORKOUTS -->
+<div id="page-workouts" class="page">
+  <h1>Workouts</h1>
+  <div class="tabs" id="workout-tabs">
+    <button class="tab active" onclick="setWorkoutTab('log',this)">Log workout</button>
+    <button class="tab" onclick="setWorkoutTab('plan',this)">Planner</button>
+    <button class="tab" onclick="setWorkoutTab('history',this)">History</button>
+  </div>
+  <div id="workout-tab-content"></div>
+</div>
+
+<!-- MOOD -->
+<div id="page-mood" class="page">
+  <h1>Mood tracker</h1>
+  <div class="card">
+    <h3 style="margin-bottom:1rem">How are you feeling today?</h3>
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:1rem" id="mood-btns">
+      <div style="text-align:center"><button class="mood-btn" onclick="selectMood(1)" id="mood-1">😞</button><div style="font-size:10px;color:var(--muted);margin-top:3px">Awful</div></div>
+      <div style="text-align:center"><button class="mood-btn" onclick="selectMood(2)" id="mood-2">😕</button><div style="font-size:10px;color:var(--muted);margin-top:3px">Bad</div></div>
+      <div style="text-align:center"><button class="mood-btn" onclick="selectMood(3)" id="mood-3">😐</button><div style="font-size:10px;color:var(--muted);margin-top:3px">Okay</div></div>
+      <div style="text-align:center"><button class="mood-btn" onclick="selectMood(4)" id="mood-4">😊</button><div style="font-size:10px;color:var(--muted);margin-top:3px">Good</div></div>
+      <div style="text-align:center"><button class="mood-btn" onclick="selectMood(5)" id="mood-5">😄</button><div style="font-size:10px;color:var(--muted);margin-top:3px">Great</div></div>
+    </div>
+    <div class="form-group"><label>Notes (optional)</label><textarea id="mood-note" rows="2" placeholder="What's on your mind?"></textarea></div>
+    <button class="btn btn-accent" onclick="saveMood()"><i class="ti ti-check"></i>Log mood</button>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h3 style="margin-bottom:0.75rem">Mood trend (30 days)</h3><div style="position:relative;height:180px"><canvas id="moodChart"></canvas></div></div>
+    <div class="card"><h3 style="margin-bottom:0.75rem">Recent entries</h3><div id="mood-log"></div></div>
   </div>
 </div>
 
@@ -349,11 +435,51 @@ tr:last-child td{border-bottom:none}
   <div id="todo-content"></div>
 </div>
 
+<!-- LIFE GOALS -->
+<div id="page-goals" class="page">
+  <h1>Life goals</h1>
+  <div class="section-header">
+    <p style="color:var(--muted);font-size:13px">Your big picture goals</p>
+    <button class="btn btn-accent" onclick="openModal('lifegoalModal')"><i class="ti ti-plus"></i>Add goal</button>
+  </div>
+  <div id="lifegoal-list"></div>
+</div>
+
+<!-- WEEKLY REVIEW -->
+<div id="page-review" class="page">
+  <h1>Weekly review</h1>
+  <div class="card">
+    <h3 style="margin-bottom:1rem">Week of <span id="review-week-label"></span></h3>
+    <div style="display:flex;gap:8px;margin-bottom:1rem">
+      <button class="btn btn-sm" onclick="reviewNav(-1)"><i class="ti ti-chevron-left"></i></button>
+      <button class="btn btn-sm" onclick="reviewNav(1)"><i class="ti ti-chevron-right"></i></button>
+    </div>
+    <div class="form-group"><label>✅ What went well?</label><textarea id="review-well" rows="3" placeholder="Wins, progress, proud moments..."></textarea></div>
+    <div class="form-group"><label>❌ What didn't go well?</label><textarea id="review-bad" rows="3" placeholder="Challenges, setbacks, areas to improve..."></textarea></div>
+    <div class="form-group"><label>🎯 Focus for next week</label><textarea id="review-focus" rows="3" placeholder="Top priorities, intentions..."></textarea></div>
+    <button class="btn btn-accent" onclick="saveReview()"><i class="ti ti-device-floppy"></i>Save review</button>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:0.75rem">Past reviews</h3>
+    <div id="review-history"></div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div id="page-notes" class="page">
+  <h1>Notes</h1>
+  <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap">
+    <button class="btn btn-accent" onclick="openModal('noteModal')"><i class="ti ti-plus"></i>New note</button>
+    <div id="note-tabs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+  </div>
+  <div id="note-content"></div>
+</div>
+
 <!-- ACHIEVEMENTS -->
 <div id="page-achievements" class="page">
   <h1>Achievements</h1>
   <div class="section-header">
-    <p style="color:var(--muted);font-size:13px">Log your accomplishments and milestones</p>
+    <p style="color:var(--muted);font-size:13px">Log your accomplishments</p>
     <button class="btn btn-accent" onclick="openModal('achModal')"><i class="ti ti-plus"></i>Add</button>
   </div>
   <div id="ach-list"></div>
@@ -361,9 +487,9 @@ tr:last-child td{border-bottom:none}
 
 <!-- LINKS -->
 <div id="page-links" class="page">
-  <h1>Important Links</h1>
+  <h1>Important links</h1>
   <div class="section-header">
-    <p style="color:var(--muted);font-size:13px">Your most important websites in one place</p>
+    <p style="color:var(--muted);font-size:13px">Your most important websites</p>
     <button class="btn btn-accent" onclick="openModal('linkModal')"><i class="ti ti-plus"></i>Add link</button>
   </div>
   <div id="links-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"></div>
@@ -374,14 +500,14 @@ tr:last-child td{border-bottom:none}
   <h1>Settings</h1>
   <div class="card">
     <h3 style="margin-bottom:1rem">Theme</h3>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-      <div style="text-align:center"><div class="theme-swatch active" id="sw-navy" style="background:#0f3460" onclick="setTheme('navy','sw-navy')" title="Navy"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Navy</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-purple" style="background:#534AB7" onclick="setTheme('purple','sw-purple')" title="Purple"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Purple</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-forest" style="background:#2d6a4f" onclick="setTheme('forest','sw-forest')" title="Forest"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Forest</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-rose" style="background:#c9184a" onclick="setTheme('rose','sw-rose')" title="Rose"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Rose</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-dark" style="background:#161b22" onclick="setTheme('dark','sw-dark')" title="Dark"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Dark</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-midnight" style="background:#0e0e2e" onclick="setTheme('midnight','sw-midnight')" title="Midnight"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Midnight</div></div>
-      <div style="text-align:center"><div class="theme-swatch" id="sw-slate" style="background:#475569" onclick="setTheme('slate','sw-slate')" title="Slate"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Slate</div></div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <div style="text-align:center"><div class="theme-swatch active" id="sw-navy" style="background:#0f3460" onclick="setTheme('navy','sw-navy')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Navy</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-purple" style="background:#534AB7" onclick="setTheme('purple','sw-purple')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Purple</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-forest" style="background:#2d6a4f" onclick="setTheme('forest','sw-forest')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Forest</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-rose" style="background:#c9184a" onclick="setTheme('rose','sw-rose')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Rose</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-dark" style="background:#161b22" onclick="setTheme('dark','sw-dark')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Dark</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-midnight" style="background:#0e0e2e" onclick="setTheme('midnight','sw-midnight')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Midnight</div></div>
+      <div style="text-align:center"><div class="theme-swatch" id="sw-slate" style="background:#475569" onclick="setTheme('slate','sw-slate')"></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Slate</div></div>
     </div>
   </div>
   <div class="card">
@@ -391,7 +517,7 @@ tr:last-child td{border-bottom:none}
       <div class="form-group"><label>Confirm PIN</label><input type="password" id="confirm-pin" placeholder="••••••" maxlength="6"></div>
     </div>
     <button class="btn btn-accent" onclick="changePin()"><i class="ti ti-lock"></i>Update PIN</button>
-    <div id="pin-change-msg" style="font-size:12px;margin-top:8px;color:var(--green)"></div>
+    <div id="pin-change-msg" style="font-size:12px;margin-top:8px"></div>
   </div>
   <div class="card">
     <h3 style="margin-bottom:1rem">Data</h3>
@@ -402,22 +528,13 @@ tr:last-child td{border-bottom:none}
       <button class="btn btn-danger" onclick="clearData()"><i class="ti ti-trash"></i>Clear all data</button>
     </div>
   </div>
-  <div class="card">
-    <h3 style="margin-bottom:1rem">More pages</h3>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn" onclick="navTo('transactions')"><i class="ti ti-arrows-exchange"></i>Transactions</button>
-      <button class="btn" onclick="navTo('subscriptions')"><i class="ti ti-refresh"></i>Subscriptions</button>
-      <button class="btn" onclick="navTo('achievements')"><i class="ti ti-trophy"></i>Achievements</button>
-      <button class="btn" onclick="navTo('links')"><i class="ti ti-link"></i>Links</button>
-    </div>
-  </div>
 </div>
 
 </main>
 
 <!-- ===== MODALS ===== -->
 <div id="accountModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'accountModal')">
-<div class="modal"><div class="modal-handle"></div><h3 id="accModalTitle">Add account</h3>
+<div class="modal"><div class="modal-handle"></div><h3>Add account</h3>
   <div class="form-row">
     <div class="form-group"><label>Name</label><input type="text" id="acc-name" placeholder="Barclays current"></div>
     <div class="form-group"><label>Type</label><select id="acc-type"><option>Current</option><option>Savings</option><option>ISA</option><option>Pension</option><option>Other</option></select></div>
@@ -439,17 +556,60 @@ tr:last-child td{border-bottom:none}
   <div class="modal-actions"><button class="btn" onclick="closeModal('investmentModal')">Cancel</button><button class="btn btn-accent" onclick="saveInvestment()">Save</button></div>
 </div></div>
 
-<div id="goalModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'goalModal')">
+<div id="fingoalModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'fingoalModal')">
 <div class="modal"><div class="modal-handle"></div><h3>Add savings goal</h3>
   <div class="form-row">
-    <div class="form-group"><label>Name</label><input type="text" id="goal-name" placeholder="Emergency fund"></div>
-    <div class="form-group"><label>Target (£)</label><input type="number" id="goal-target" placeholder="10000"></div>
+    <div class="form-group"><label>Name</label><input type="text" id="fgoal-name" placeholder="Emergency fund"></div>
+    <div class="form-group"><label>Target (£)</label><input type="number" id="fgoal-target" placeholder="10000"></div>
   </div>
   <div class="form-row">
-    <div class="form-group"><label>Current amount (£)</label><input type="number" id="goal-current" placeholder="0"></div>
-    <div class="form-group"><label>Target date</label><input type="date" id="goal-date"></div>
+    <div class="form-group"><label>Current (£)</label><input type="number" id="fgoal-current" placeholder="0"></div>
+    <div class="form-group"><label>Target date</label><input type="date" id="fgoal-date"></div>
   </div>
-  <div class="modal-actions"><button class="btn" onclick="closeModal('goalModal')">Cancel</button><button class="btn btn-accent" onclick="saveGoal()">Save</button></div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('fingoalModal')">Cancel</button><button class="btn btn-accent" onclick="saveFinGoal()">Save</button></div>
+</div></div>
+
+<div id="budgetModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'budgetModal')">
+<div class="modal"><div class="modal-handle"></div><h3>Add budget</h3>
+  <div class="form-row">
+    <div class="form-group"><label>Category</label><select id="bud-cat"></select></div>
+    <div class="form-group"><label>Monthly limit (£)</label><input type="number" id="bud-limit" placeholder="200"></div>
+  </div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('budgetModal')">Cancel</button><button class="btn btn-accent" onclick="saveBudget()">Save</button></div>
+</div></div>
+
+<div id="debtModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'debtModal')">
+<div class="modal"><div class="modal-handle"></div><h3>Add debt</h3>
+  <div class="form-row">
+    <div class="form-group"><label>Name</label><input type="text" id="debt-name" placeholder="Student loan"></div>
+    <div class="form-group"><label>Type</label><select id="debt-type"><option>Loan</option><option>Credit card</option><option>Overdraft</option><option>Mortgage</option><option>Other</option></select></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Balance (£)</label><input type="number" id="debt-balance" placeholder="5000"></div>
+    <div class="form-group"><label>Interest rate (%)</label><input type="number" id="debt-rate" placeholder="5.5" step="0.1"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Min payment (£/mo)</label><input type="number" id="debt-payment" placeholder="100"></div>
+    <div class="form-group"><label>Due date (monthly)</label><input type="number" id="debt-due-day" placeholder="1" min="1" max="31"></div>
+  </div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('debtModal')">Cancel</button><button class="btn btn-accent" onclick="saveDebt()">Save</button></div>
+</div></div>
+
+<div id="billModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'billModal')">
+<div class="modal"><div class="modal-handle"></div><h3>Add bill</h3>
+  <div class="form-row">
+    <div class="form-group"><label>Name</label><input type="text" id="bill-name" placeholder="Council tax"></div>
+    <div class="form-group"><label>Amount (£)</label><input type="number" id="bill-amount" placeholder="150"></div>
+  </div>
+  <div class="form-row">
+    <div class="form-group"><label>Due date</label><input type="date" id="bill-date"></div>
+    <div class="form-group"><label>Category</label><select id="bill-cat"><option>Utilities</option><option>Rent/Mortgage</option><option>Insurance</option><option>Tax</option><option>Other</option></select></div>
+  </div>
+  <div class="form-group" style="display:flex;align-items:center;gap:10px">
+    <input type="checkbox" id="bill-recurring" style="width:auto" checked>
+    <label style="text-transform:none;letter-spacing:0;font-size:13px;color:var(--text)">Recurring monthly</label>
+  </div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('billModal')">Cancel</button><button class="btn btn-accent" onclick="saveBill()">Save</button></div>
 </div></div>
 
 <div id="subModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'subModal')">
@@ -468,7 +628,7 @@ tr:last-child td{border-bottom:none}
   </div>
   <div class="form-group" style="display:flex;align-items:center;gap:10px">
     <input type="checkbox" id="sub-recurring" style="width:auto" checked>
-    <label style="text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:var(--text)">Auto-add to transactions on billing date</label>
+    <label style="text-transform:none;letter-spacing:0;font-size:13px;color:var(--text)">Auto-add to transactions on billing date</label>
   </div>
   <div class="modal-actions"><button class="btn" onclick="closeModal('subModal')">Cancel</button><button class="btn btn-accent" onclick="saveSubscription()">Save</button></div>
 </div></div>
@@ -479,21 +639,16 @@ tr:last-child td{border-bottom:none}
   <div class="form-row">
     <div class="form-group"><label>Icon</label>
       <div class="chip-row" id="icon-picker">
-        <span class="chip selected" data-icon="🏃">🏃</span><span class="chip" data-icon="📚">📚</span>
-        <span class="chip" data-icon="💧">💧</span><span class="chip" data-icon="🧘">🧘</span>
-        <span class="chip" data-icon="💪">💪</span><span class="chip" data-icon="🛌">🛌</span>
-        <span class="chip" data-icon="✍️">✍️</span><span class="chip" data-icon="🥗">🥗</span>
-        <span class="chip" data-icon="🎯">🎯</span><span class="chip" data-icon="🚴">🚴</span>
+        <span class="chip selected" data-icon="🏃">🏃</span><span class="chip" data-icon="📚">📚</span><span class="chip" data-icon="💧">💧</span>
+        <span class="chip" data-icon="🧘">🧘</span><span class="chip" data-icon="💪">💪</span><span class="chip" data-icon="🛌">🛌</span>
+        <span class="chip" data-icon="✍️">✍️</span><span class="chip" data-icon="🥗">🥗</span><span class="chip" data-icon="🎯">🎯</span><span class="chip" data-icon="🚴">🚴</span>
       </div>
     </div>
     <div class="form-group"><label>Colour</label>
       <div class="chip-row" id="color-picker">
-        <span class="chip selected" data-color="#0f3460">Navy</span>
-        <span class="chip" data-color="#534AB7">Purple</span>
-        <span class="chip" data-color="#185FA5">Blue</span>
-        <span class="chip" data-color="#3B6D11">Green</span>
-        <span class="chip" data-color="#BA7517">Amber</span>
-        <span class="chip" data-color="#A32D2D">Red</span>
+        <span class="chip selected" data-color="#0f3460">Navy</span><span class="chip" data-color="#534AB7">Purple</span>
+        <span class="chip" data-color="#185FA5">Blue</span><span class="chip" data-color="#3B6D11">Green</span>
+        <span class="chip" data-color="#BA7517">Amber</span><span class="chip" data-color="#A32D2D">Red</span>
       </div>
     </div>
   </div>
@@ -501,8 +656,7 @@ tr:last-child td{border-bottom:none}
     <div class="chip-row" id="day-picker" style="gap:6px">
       <div class="day-chip selected" data-day="1">Mo</div><div class="day-chip selected" data-day="2">Tu</div>
       <div class="day-chip selected" data-day="3">We</div><div class="day-chip selected" data-day="4">Th</div>
-      <div class="day-chip selected" data-day="5">Fr</div><div class="day-chip" data-day="6">Sa</div>
-      <div class="day-chip" data-day="0">Su</div>
+      <div class="day-chip selected" data-day="5">Fr</div><div class="day-chip" data-day="6">Sa</div><div class="day-chip" data-day="0">Su</div>
     </div>
   </div>
   <div class="form-group"><label>Start date</label><input type="date" id="hab-start"></div>
@@ -514,9 +668,8 @@ tr:last-child td{border-bottom:none}
   <div class="form-group"><label>Name</label><input type="text" id="list-name" placeholder="Work tasks"></div>
   <div class="form-group"><label>Icon</label>
     <div class="chip-row" id="list-icon-picker">
-      <span class="chip selected" data-icon="📋">📋</span><span class="chip" data-icon="💼">💼</span>
-      <span class="chip" data-icon="🏠">🏠</span><span class="chip" data-icon="🛒">🛒</span>
-      <span class="chip" data-icon="📚">📚</span><span class="chip" data-icon="🎯">🎯</span>
+      <span class="chip selected" data-icon="📋">📋</span><span class="chip" data-icon="💼">💼</span><span class="chip" data-icon="🏠">🏠</span>
+      <span class="chip" data-icon="🛒">🛒</span><span class="chip" data-icon="📚">📚</span><span class="chip" data-icon="🎯">🎯</span>
       <span class="chip" data-icon="🧳">🧳</span><span class="chip" data-icon="💡">💡</span>
     </div>
   </div>
@@ -529,14 +682,36 @@ tr:last-child td{border-bottom:none}
   <div class="form-row">
     <div class="form-group"><label>Priority</label>
       <div class="chip-row" id="priority-picker">
-        <span class="chip selected" data-priority="normal">Normal</span>
-        <span class="chip" data-priority="high">High</span>
-        <span class="chip" data-priority="low">Low</span>
+        <span class="chip selected" data-priority="normal">Normal</span><span class="chip" data-priority="high">High</span><span class="chip" data-priority="low">Low</span>
       </div>
     </div>
-    <div class="form-group"><label>Due date (optional)</label><input type="date" id="task-due"></div>
+    <div class="form-group"><label>Due date</label><input type="date" id="task-due"></div>
   </div>
   <div class="modal-actions"><button class="btn" onclick="closeModal('taskModal')">Cancel</button><button class="btn btn-accent" onclick="saveTask()">Save</button></div>
+</div></div>
+
+<div id="lifegoalModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'lifegoalModal')">
+<div class="modal"><div class="modal-handle"></div><h3>Add life goal</h3>
+  <div class="form-group"><label>Goal</label><input type="text" id="lg-title" placeholder="e.g. Buy a house"></div>
+  <div class="form-group"><label>Description</label><textarea id="lg-desc" rows="2" placeholder="Why does this matter to you?"></textarea></div>
+  <div class="form-row">
+    <div class="form-group"><label>Category</label><select id="lg-cat"><option>Career</option><option>Finance</option><option>Health</option><option>Travel</option><option>Relationships</option><option>Personal growth</option><option>Other</option></select></div>
+    <div class="form-group"><label>Target date</label><input type="date" id="lg-date"></div>
+  </div>
+  <div class="form-group"><label>Icon</label>
+    <div class="chip-row" id="lg-icon-picker">
+      <span class="chip selected" data-icon="🎯">🎯</span><span class="chip" data-icon="🏠">🏠</span><span class="chip" data-icon="✈️">✈️</span>
+      <span class="chip" data-icon="💰">💰</span><span class="chip" data-icon="💪">💪</span><span class="chip" data-icon="🎓">🎓</span>
+      <span class="chip" data-icon="❤️">❤️</span><span class="chip" data-icon="🚀">🚀</span>
+    </div>
+  </div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('lifegoalModal')">Cancel</button><button class="btn btn-accent" onclick="saveLifeGoal()">Save</button></div>
+</div></div>
+
+<div id="noteModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'noteModal')">
+<div class="modal"><div class="modal-handle"></div><h3>New note</h3>
+  <div class="form-group"><label>Title</label><input type="text" id="note-title" placeholder="Note title"></div>
+  <div class="modal-actions"><button class="btn" onclick="closeModal('noteModal')">Cancel</button><button class="btn btn-accent" onclick="createNote()">Create</button></div>
 </div></div>
 
 <div id="achModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'achModal')">
@@ -544,49 +719,31 @@ tr:last-child td{border-bottom:none}
   <div class="form-group"><label>Title</label><input type="text" id="ach-title" placeholder="e.g. Ran my first 5K"></div>
   <div class="form-group"><label>Description</label><textarea id="ach-desc" rows="2" placeholder="Tell the story..."></textarea></div>
   <div class="form-row">
-    <div class="form-group"><label>Category</label>
-      <select id="ach-cat"><option>Health & fitness</option><option>Career</option><option>Finance</option><option>Personal</option><option>Education</option><option>Travel</option><option>Other</option></select>
-    </div>
+    <div class="form-group"><label>Category</label><select id="ach-cat"><option>Health & fitness</option><option>Career</option><option>Finance</option><option>Personal</option><option>Education</option><option>Travel</option><option>Other</option></select></div>
     <div class="form-group"><label>Date</label><input type="date" id="ach-date"></div>
   </div>
   <div class="form-group"><label>Icon</label>
     <div class="chip-row" id="ach-icon-picker">
-      <span class="chip selected" data-icon="🏆">🏆</span><span class="chip" data-icon="🥇">🥇</span>
-      <span class="chip" data-icon="🎯">🎯</span><span class="chip" data-icon="🚀">🚀</span>
-      <span class="chip" data-icon="💪">💪</span><span class="chip" data-icon="🎓">🎓</span>
-      <span class="chip" data-icon="💰">💰</span><span class="chip" data-icon="✈️">✈️</span>
-      <span class="chip" data-icon="❤️">❤️</span><span class="chip" data-icon="⭐">⭐</span>
+      <span class="chip selected" data-icon="🏆">🏆</span><span class="chip" data-icon="🥇">🥇</span><span class="chip" data-icon="🎯">🎯</span>
+      <span class="chip" data-icon="🚀">🚀</span><span class="chip" data-icon="💪">💪</span><span class="chip" data-icon="🎓">🎓</span>
+      <span class="chip" data-icon="💰">💰</span><span class="chip" data-icon="✈️">✈️</span><span class="chip" data-icon="❤️">❤️</span><span class="chip" data-icon="⭐">⭐</span>
     </div>
   </div>
   <div class="modal-actions"><button class="btn" onclick="closeModal('achModal')">Cancel</button><button class="btn btn-accent" onclick="saveAchievement()">Save</button></div>
 </div></div>
 
 <div id="linkModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'linkModal')">
-<div class="modal"><div class="modal-handle"></div><h3 id="linkModalTitle">Add link</h3>
-  <div class="form-group"><label>Name</label><input type="text" id="link-name" placeholder="e.g. My bank"></div>
+<div class="modal"><div class="modal-handle"></div><h3>Add link</h3>
+  <div class="form-group"><label>Name</label><input type="text" id="link-name" placeholder="My bank"></div>
   <div class="form-group"><label>URL</label><input type="url" id="link-url" placeholder="https://..."></div>
-  <div class="form-group"><label>Icon / emoji</label>
+  <div class="form-group"><label>Icon</label>
     <div class="chip-row" id="link-icon-picker">
-      <span class="chip selected" data-icon="🔗">🔗</span><span class="chip" data-icon="🏦">🏦</span>
-      <span class="chip" data-icon="📧">📧</span><span class="chip" data-icon="💼">💼</span>
-      <span class="chip" data-icon="🛒">🛒</span><span class="chip" data-icon="📰">📰</span>
-      <span class="chip" data-icon="🎵">🎵</span><span class="chip" data-icon="🎬">🎬</span>
-      <span class="chip" data-icon="📱">📱</span><span class="chip" data-icon="☁️">☁️</span>
+      <span class="chip selected" data-icon="🔗">🔗</span><span class="chip" data-icon="🏦">🏦</span><span class="chip" data-icon="📧">📧</span>
+      <span class="chip" data-icon="💼">💼</span><span class="chip" data-icon="🛒">🛒</span><span class="chip" data-icon="📰">📰</span>
+      <span class="chip" data-icon="🎵">🎵</span><span class="chip" data-icon="🎬">🎬</span><span class="chip" data-icon="📱">📱</span><span class="chip" data-icon="☁️">☁️</span>
     </div>
   </div>
   <div class="modal-actions"><button class="btn" onclick="closeModal('linkModal')">Cancel</button><button class="btn btn-accent" onclick="saveLink()">Save</button></div>
-</div></div>
-
-<!-- Edit modal (hold to edit) -->
-<div id="editModal" class="modal-overlay" style="display:none" onclick="closeOnOverlay(event,'editModal')">
-<div class="modal"><div class="modal-handle"></div><h3>Edit</h3>
-  <div class="form-group"><label>Name</label><input type="text" id="edit-name"></div>
-  <div class="form-group"><label>Icon / emoji</label><input type="text" id="edit-icon" maxlength="2" style="font-size:22px;text-align:center;width:60px"></div>
-  <div class="modal-actions">
-    <button class="btn btn-danger" onclick="editModalDelete()"><i class="ti ti-trash"></i>Delete</button>
-    <button class="btn" onclick="closeModal('editModal')">Cancel</button>
-    <button class="btn btn-accent" onclick="editModalSave()">Save</button>
-  </div>
 </div></div>
 
 <script>
@@ -614,33 +771,25 @@ const GREETINGS=[
   {lang:'Polski',morning:'Dzień dobry',afternoon:'Dzień dobry',evening:'Dobry wieczór'},
 ];
 let greetingIdx=0;
-
 function getTimeOfDay(){const h=new Date().getHours();return h<12?'morning':h<18?'afternoon':'evening';}
 function showGreeting(){
-  const g=GREETINGS[greetingIdx%GREETINGS.length];
-  const tod=getTimeOfDay();
-  const phrase=g[tod];
+  const g=GREETINGS[greetingIdx%GREETINGS.length];const tod=getTimeOfDay();
   document.getElementById('greeting-lang').textContent=g.lang;
-  document.getElementById('greeting-text').textContent=phrase+', Charlie';
-  const gs=document.getElementById('greeting-screen');
-  gs.classList.add('show');
-  setTimeout(()=>{gs.classList.add('hide');setTimeout(()=>{gs.style.display='none';},500);},2200);
+  document.getElementById('greeting-text').textContent=g[tod]+', Charlie';
+  const gs=document.getElementById('greeting-screen');gs.style.display='flex';
+  setTimeout(()=>{gs.classList.add('show');},10);
+  setTimeout(()=>{gs.classList.add('hide');setTimeout(()=>{gs.style.display='none';gs.classList.remove('show','hide');},500);},2400);
   greetingIdx++;
 }
 
 // ===== PIN =====
 let pinEntry='';
-const CORRECT_PIN_KEY='lifedash_pin';
-function getPin(){return localStorage.getItem(CORRECT_PIN_KEY)||'781845';}
-function pinPress(n){
-  if(pinEntry.length>=6)return;
-  pinEntry+=n;
-  updatePinDots();
-  if(pinEntry.length===6)setTimeout(checkPin,150);
-}
+const PIN_KEY='lifedash_pin';
+function getPin(){return localStorage.getItem(PIN_KEY)||'781845';}
+function pinPress(n){if(pinEntry.length>=6)return;pinEntry+=n;updatePinDots();if(pinEntry.length===6)setTimeout(checkPin,150);}
 function pinBack(){pinEntry=pinEntry.slice(0,-1);updatePinDots();}
 function pinClear(){pinEntry='';updatePinDots();}
-function updatePinDots(){for(let i=0;i<6;i++){document.getElementById('d'+i).classList.toggle('filled',i<pinEntry.length);}}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('d'+i).classList.toggle('filled',i<pinEntry.length);}
 function checkPin(){
   if(pinEntry===getPin()){
     document.getElementById('pin-error').textContent='';
@@ -649,49 +798,44 @@ function checkPin(){
   }else{
     document.getElementById('pin-error').textContent='Incorrect PIN — try again';
     pinEntry='';updatePinDots();
-    document.getElementById('pin-dots').style.animation='none';
-    setTimeout(()=>{document.getElementById('pin-dots').style.animation='';},100);
   }
 }
 function changePin(){
-  const np=document.getElementById('new-pin').value;
-  const cp=document.getElementById('confirm-pin').value;
+  const np=document.getElementById('new-pin').value,cp=document.getElementById('confirm-pin').value;
   const msg=document.getElementById('pin-change-msg');
-  if(!/^\d{6}$/.test(np)){msg.style.color='var(--red)';msg.textContent='PIN must be exactly 6 digits';return;}
+  if(!/^\d{6}$/.test(np)){msg.style.color='var(--red)';msg.textContent='PIN must be 6 digits';return;}
   if(np!==cp){msg.style.color='var(--red)';msg.textContent='PINs do not match';return;}
-  localStorage.setItem(CORRECT_PIN_KEY,np);
-  msg.style.color='var(--green)';msg.textContent='PIN updated ✓';
+  localStorage.setItem(PIN_KEY,np);msg.style.color='var(--green)';msg.textContent='PIN updated ✓';
   document.getElementById('new-pin').value='';document.getElementById('confirm-pin').value='';
 }
 
-// ===== STORAGE =====
-const SAVE_KEY='lifedash_v4';
-const BACKUP_KEY='lifedash_v4_bak';
-let saveTimer=null;
+// ===== STATE =====
 const CATS=['Food & drink','Transport','Shopping','Bills','Entertainment','Health','Salary','Savings','Investment','Other'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-
+const MOOD_EMOJIS={1:'😞',2:'😕',3:'😐',4:'😊',5:'😄'};
 const S={
-  accounts:[],investments:[],goals:[],transactions:[],subscriptions:[],networthHistory:[],
+  accounts:[],investments:[],fingoals:[],transactions:[],budgets:[],debts:[],bills:[],subscriptions:[],networthHistory:[],
   habits:[],habitLogs:{},
   lists:[],tasks:[],completedTasks:[],
-  achievements:[],links:[],
-  finTab:'summary',
-  habMonthYear:new Date().getFullYear(),habMonthMonth:new Date().getMonth(),
-  currentList:null,todoView:'all',editingListId:null,
-  theme:'navy'
+  lifegoals:[],notes:[],achievements:[],links:[],
+  healthMetrics:[],workouts:[],workoutPlans:[],moodLogs:[],
+  weeklyReviews:{},
+  finTab:'summary',habMonthYear:new Date().getFullYear(),habMonthMonth:new Date().getMonth(),
+  currentList:null,todoView:'all',editingListId:null,currentNote:null,
+  workoutTab:'log',selectedMood:0,reviewOffset:0,theme:'navy'
 };
-let networthChartInst=null,habitChartInst=null,spendChartInst=null;
+let charts={};
+const SAVE_KEY='lifedash_v5',BACKUP_KEY='lifedash_v5_bak';
+let saveTimer=null;
 
 function showSaveBadge(msg,persist){
   let b=document.getElementById('save-badge');
   if(!b){b=document.createElement('div');b.id='save-badge';document.body.appendChild(b);}
-  b.style.opacity='1';b.textContent=msg;
-  clearTimeout(b._t);if(!persist)b._t=setTimeout(()=>{b.style.opacity='0';},2000);
+  b.style.opacity='1';b.textContent=msg;clearTimeout(b._t);
+  if(!persist)b._t=setTimeout(()=>{b.style.opacity='0';},2000);
 }
 function save(){
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>{
+  clearTimeout(saveTimer);saveTimer=setTimeout(()=>{
     try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));showSaveBadge('Saved ✓');}
     catch(e){showSaveBadge('Save failed ⚠️');}
   },300);
@@ -704,41 +848,23 @@ function load(){
   if(!raw){try{raw=localStorage.getItem(BACKUP_KEY);}catch(e){}}
   if(raw){try{const d=JSON.parse(raw);Object.keys(d).forEach(k=>{if(k in S)S[k]=d[k];});showSaveBadge('Restored ✓');}catch(e){}}
   else showSaveBadge('Welcome, Charlie!');
-  document.getElementById('qt-date').value=today();
-  document.getElementById('qt2-date').value=today();
-  document.getElementById('hab-start').value=today();
-  document.getElementById('sub-date').value=today();
-  document.getElementById('ach-date').value=today();
-  populateCatSelects();populateAccSelects();
-  applyTheme(S.theme||'navy');
-  checkRecurringSubscriptions();
-  renderAll();
+  initDefaults();populateCatSelects();populateAccSelects();applyTheme(S.theme||'navy');
+  checkRecurringSubscriptions();renderAll();
 }
-function exportData(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='lifedash-backup-'+today()+'.json';a.click();
+function initDefaults(){
+  const flds={qt:'qt-date',qt2:'qt2-date','hab':'hab-start','sub':'sub-date','ach':'ach-date','hm':'hm-date'};
+  Object.entries(flds).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.value=today();});
+  const bd=document.getElementById('bill-date');if(bd)bd.value=today();
+  const ld=document.getElementById('lg-date');if(ld)ld.value='';
+  const fgd=document.getElementById('fgoal-date');if(fgd)fgd.value='';
 }
-function importData(e){
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{try{const d=JSON.parse(ev.target.result);Object.keys(d).forEach(k=>{if(k in S)S[k]=d[k];});save();applyTheme(S.theme||'navy');renderAll();showSaveBadge('Imported ✓');}catch(err){alert('Import failed');}};
-  reader.readAsText(file);
-}
-function clearData(){
-  if(!confirm('Delete ALL data? This cannot be undone.'))return;
-  ['accounts','investments','goals','transactions','subscriptions','networthHistory','habits','habitLogs','lists','tasks','completedTasks','achievements','links'].forEach(k=>{S[k]=typeof S[k]==='object'&&!Array.isArray(S[k])?{}:[];});
-  save();renderAll();
-}
+function exportData(){const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='lifedash-backup-'+today()+'.json';a.click();}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);Object.keys(d).forEach(k=>{if(k in S)S[k]=d[k];});save();applyTheme(S.theme||'navy');renderAll();showSaveBadge('Imported ✓');}catch(err){alert('Import failed');}};r.readAsText(f);}
+function clearData(){if(!confirm('Delete ALL data?'))return;['accounts','investments','fingoals','transactions','budgets','debts','bills','subscriptions','networthHistory','habits','habitLogs','lists','tasks','completedTasks','lifegoals','notes','achievements','links','healthMetrics','workouts','workoutPlans','moodLogs','weeklyReviews'].forEach(k=>{S[k]=k==='habitLogs'||k==='weeklyReviews'?{}:[];});save();renderAll();}
 
 // ===== THEME =====
-function applyTheme(name){
-  document.body.setAttribute('data-theme',name==='navy'?'':name);
-  S.theme=name;
-  document.querySelectorAll('.theme-swatch').forEach(s=>s.classList.remove('active'));
-  const sw=document.getElementById('sw-'+name);if(sw)sw.classList.add('active');
-}
-function setTheme(name,swId){applyTheme(name);save();}
+function applyTheme(name){document.body.setAttribute('data-theme',name==='navy'?'':name);S.theme=name;document.querySelectorAll('.theme-swatch').forEach(s=>s.classList.remove('active'));const sw=document.getElementById('sw-'+name);if(sw)sw.classList.add('active');}
+function setTheme(name){applyTheme(name);save();}
 
 // ===== UTILS =====
 function today(){return new Date().toISOString().slice(0,10);}
@@ -748,17 +874,17 @@ function fmtGBP0(n){return'£'+Number(n).toLocaleString('en-GB',{minimumFraction
 function openModal(id){document.getElementById(id).style.display='flex';}
 function closeModal(id){document.getElementById(id).style.display='none';}
 function closeOnOverlay(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function mkChart(id,type,data,options){destroyChart(id);const c=document.getElementById(id);if(!c)return;charts[id]=new Chart(c,{type,data,options});}
 
 // Chip pickers
-['#icon-picker','#color-picker','#list-icon-picker','#priority-picker','#ach-icon-picker','#link-icon-picker'].forEach(sel=>{
-  setTimeout(()=>{document.querySelectorAll(sel+' .chip').forEach(c=>c.onclick=()=>{
-    document.querySelectorAll(sel+' .chip').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');
-  });},0);
+['#icon-picker','#color-picker','#list-icon-picker','#priority-picker','#ach-icon-picker','#link-icon-picker','#lg-icon-picker'].forEach(sel=>{
+  setTimeout(()=>{document.querySelectorAll(sel+' .chip').forEach(c=>c.onclick=()=>{document.querySelectorAll(sel+' .chip').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');});},0);
 });
 setTimeout(()=>{document.querySelectorAll('#day-picker .day-chip').forEach(c=>c.onclick=()=>c.classList.toggle('selected'));},0);
 
 function populateCatSelects(){
-  ['qt-cat','qt2-cat'].forEach(id=>{const s=document.getElementById(id);if(!s)return;s.innerHTML=CATS.map(c=>`<option>${c}</option>`).join('');});
+  ['qt-cat','qt2-cat','bud-cat'].forEach(id=>{const s=document.getElementById(id);if(!s)return;s.innerHTML=CATS.map(c=>`<option>${c}</option>`).join('');});
 }
 function populateAccSelects(){
   const opts=S.accounts.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
@@ -766,20 +892,27 @@ function populateAccSelects(){
   ['qt-account','qt-to-account','qt2-account','qt2-to-account','sub-account'].forEach(id=>{const s=document.getElementById(id);if(s)s.innerHTML=opts||fb;});
 }
 function updateQT(pfx){document.getElementById(pfx+'-to-group').style.display=document.getElementById(pfx+'-type').value==='transfer'?'':'none';}
+function checkOtherCat(pfx){
+  const val=document.getElementById(pfx+'-cat').value;
+  const grp=document.getElementById(pfx+'-other-group');
+  if(grp)grp.style.display=val==='Other'?'':'none';
+}
 
 // ===== NAV =====
-function toggleSidebar(){
-  const sb=document.getElementById('sidebar');sb.classList.toggle('open');
-}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
 function showPage(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item,.bnav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('[data-page="'+id+'"]').forEach(b=>b.classList.add('active'));
   const sb=document.getElementById('sidebar');if(sb.classList.contains('open'))sb.classList.remove('open');
-  const renders={dashboard:renderDashboard,finance:renderFinance,transactions:renderTransactions,
-    subscriptions:renderSubscriptions,habits:renderHabits,todos:renderTodos,
-    achievements:renderAchievements,links:renderLinks,settings:()=>{}};
+  const renders={
+    dashboard:renderDashboard,finance:renderFinance,transactions:renderTransactions,
+    budget:renderBudget,debt:renderDebt,bills:renderBills,subscriptions:renderSubscriptions,
+    health:renderHealth,workouts:()=>renderWorkoutTab(S.workoutTab),mood:renderMood,
+    habits:renderHabits,todos:renderTodos,goals:renderLifeGoals,
+    review:renderReview,notes:renderNotes,achievements:renderAchievements,links:renderLinks,settings:()=>{}
+  };
   if(renders[id])renders[id]();
 }
 function navTo(id){showPage(id,null);}
@@ -789,9 +922,10 @@ function doAddTx(pfx){
   const amt=parseFloat(document.getElementById(pfx+'-amount').value);
   const type=document.getElementById(pfx+'-type').value;
   const accId=document.getElementById(pfx+'-account').value;
-  const desc=document.getElementById(pfx+'-desc').value.trim()||'Transaction';
+  let desc=document.getElementById(pfx+'-desc').value.trim()||'Transaction';
   const date=document.getElementById(pfx+'-date').value||today();
-  const cat=document.getElementById(pfx+'-cat').value;
+  let cat=document.getElementById(pfx+'-cat').value;
+  if(cat==='Other'){const custom=document.getElementById(pfx+'-other-name')?.value.trim();if(custom)cat=custom;}
   const toAccId=type==='transfer'?document.getElementById(pfx+'-to-account').value:null;
   if(!amt||amt<=0){alert('Enter a valid amount');return;}
   if(!accId){alert('Add an account first');return;}
@@ -799,7 +933,7 @@ function doAddTx(pfx){
   S.transactions.push({id:uid(),date,type,amount:amt,accountId:accId,toAccountId:toAccId,description:desc,category:cat});
   recordNetworth();save();
   document.getElementById(pfx+'-amount').value='';document.getElementById(pfx+'-desc').value='';
-  renderDashboard();renderFinance();renderTransactions();
+  renderDashboard();renderFinance();renderTransactions();renderBudget();
 }
 function applyTxToAccount(type,accId,toAccId,amt){
   const acc=S.accounts.find(a=>a.id===accId);if(!acc)return;
@@ -807,10 +941,7 @@ function applyTxToAccount(type,accId,toAccId,amt){
   if(type==='income')acc.balance+=amt;
   if(type==='transfer'){acc.balance=Math.max(0,acc.balance-amt);const t2=S.accounts.find(a=>a.id===toAccId);if(t2)t2.balance+=amt;}
 }
-function deleteTx(id){
-  S.transactions=S.transactions.filter(t=>t.id!==id);
-  save();renderTransactions();renderDashboard();renderFinance();
-}
+function deleteTx(id){S.transactions=S.transactions.filter(t=>t.id!==id);save();renderTransactions();renderDashboard();renderFinance();renderBudget();}
 function renderTransactions(){
   const typeF=document.getElementById('tx-filter-type')?.value||'';
   const catF=document.getElementById('tx-filter-cat')?.value||'';
@@ -828,25 +959,115 @@ function renderTransactions(){
   el.innerHTML=`<table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Account</th><th>Type</th><th>Amount</th><th></th></tr></thead><tbody>
   ${txs.map(t=>{const acc=S.accounts.find(a=>a.id===t.accountId);const toAcc=t.toAccountId?S.accounts.find(a=>a.id===t.toAccountId):null;
     const sign=t.type==='income'?'+':t.type==='transfer'?'⇄':'-';const bc=t.type==='income'?'badge-green':t.type==='transfer'?'badge-accent':'badge-red';
-    return`<tr><td style="color:var(--muted)">${t.date}</td><td style="font-weight:500">${t.description}</td>
+    return`<tr><td style="color:var(--muted)">${t.date}</td><td style="font-weight:600">${t.description}</td>
     <td><span class="badge badge-blue">${t.category||''}</span></td>
     <td>${acc?acc.name:'?'}${toAcc?' → '+toAcc.name:''}</td>
     <td><span class="badge ${bc}">${t.type}</span></td>
-    <td style="font-weight:600;color:${t.type==='income'?'var(--green)':t.type==='transfer'?'var(--accent)':'var(--red)'}">${sign}${fmtGBP(t.amount)}</td>
-    <td><button class="btn btn-danger btn-sm" onclick="deleteTx('${t.id}')"><i class="ti ti-trash"></i></button></td></tr>`;
-  }).join('')}</tbody></table>`;
+    <td style="font-weight:700;color:${t.type==='income'?'var(--green)':t.type==='transfer'?'var(--accent)':'var(--red)'}">${sign}${fmtGBP(t.amount)}</td>
+    <td><button class="btn btn-danger btn-sm" onclick="deleteTx('${t.id}')"><i class="ti ti-trash"></i></button></td></tr>`;}).join('')}</tbody></table>`;
+}
+
+// ===== BUDGET =====
+function saveBudget(){
+  const cat=document.getElementById('bud-cat').value;
+  const limit=parseFloat(document.getElementById('bud-limit').value)||0;
+  if(!limit)return;
+  const existing=S.budgets.find(b=>b.cat===cat);
+  if(existing)existing.limit=limit;else S.budgets.push({id:uid(),cat,limit});
+  closeModal('budgetModal');document.getElementById('bud-limit').value='';save();renderBudget();
+}
+function deleteBudget(id){S.budgets=S.budgets.filter(b=>b.id!==id);save();renderBudget();}
+function renderBudget(){
+  const mn=new Date().toISOString().slice(0,7);
+  const totalBudget=S.budgets.reduce((s,b)=>s+b.limit,0);
+  const spendBycat={};S.transactions.filter(t=>t.type==='expense'&&t.date.startsWith(mn)).forEach(t=>{spendBycat[t.category]=(spendBycat[t.category]||0)+t.amount;});
+  const totalSpent=S.budgets.reduce((s,b)=>s+(spendBycat[b.cat]||0),0);
+  const over=S.budgets.filter(b=>(spendBycat[b.cat]||0)>b.limit).length;
+  const els={bud_total:'bud-total',bud_spent:'bud-spent',bud_remaining:'bud-remaining',bud_over:'bud-over'};
+  document.getElementById('bud-total').textContent=fmtGBP0(totalBudget);
+  document.getElementById('bud-spent').textContent=fmtGBP0(totalSpent);
+  document.getElementById('bud-remaining').textContent=fmtGBP0(Math.max(0,totalBudget-totalSpent));
+  document.getElementById('bud-over').textContent=over;
+  const el=document.getElementById('budget-list');if(!el)return;
+  if(!S.budgets.length){el.innerHTML='<div class="empty-state"><i class="ti ti-chart-pie"></i>No budgets set yet</div>';return;}
+  el.innerHTML=S.budgets.map(b=>{
+    const spent=spendBycat[b.cat]||0;const pct=Math.min(100,(spent/b.limit)*100);const isOver=spent>b.limit;
+    return`<div class="budget-item">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div style="font-weight:600">${b.cat}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;color:${isOver?'var(--red)':'var(--muted)'}">${fmtGBP0(spent)} / ${fmtGBP0(b.limit)}</span>
+          ${isOver?'<span class="badge badge-red">Over</span>':''}
+          <button class="btn btn-danger btn-sm" onclick="deleteBudget('${b.id}')"><i class="ti ti-trash"></i></button>
+        </div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill ${isOver?'over':''}" style="width:${pct}%"></div></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:3px">${pct.toFixed(0)}% used${isOver?` · ${fmtGBP0(spent-b.limit)} over budget`:` · ${fmtGBP0(b.limit-spent)} remaining`}</div>
+    </div>`;}).join('');
+}
+
+// ===== DEBT =====
+function saveDebt(){
+  const name=document.getElementById('debt-name').value.trim();if(!name)return;
+  S.debts.push({id:uid(),name,type:document.getElementById('debt-type').value,balance:parseFloat(document.getElementById('debt-balance').value)||0,rate:parseFloat(document.getElementById('debt-rate').value)||0,payment:parseFloat(document.getElementById('debt-payment').value)||0,dueDay:parseInt(document.getElementById('debt-due-day').value)||1});
+  closeModal('debtModal');document.getElementById('debt-name').value='';document.getElementById('debt-balance').value='';
+  save();renderDebt();
+}
+function deleteDebt(id){S.debts=S.debts.filter(d=>d.id!==id);save();renderDebt();}
+function updateDebtBal(id){const d=S.debts.find(x=>x.id===id);if(!d)return;const v=prompt('Update balance for '+d.name+' (£):',d.balance);if(v===null)return;d.balance=parseFloat(v)||0;save();renderDebt();}
+function renderDebt(){
+  const total=S.debts.reduce((s,d)=>s+d.balance,0);
+  const monthly=S.debts.reduce((s,d)=>s+d.payment,0);
+  document.getElementById('debt-total').textContent=fmtGBP0(total);
+  document.getElementById('debt-monthly').textContent=fmtGBP0(monthly);
+  document.getElementById('debt-count').textContent=S.debts.length;
+  const el=document.getElementById('debt-list');if(!el)return;
+  if(!S.debts.length){el.innerHTML='<div class="empty-state"><i class="ti ti-credit-card"></i>No debts tracked</div>';return;}
+  el.innerHTML=`<table><thead><tr><th>Name</th><th>Type</th><th>Balance</th><th>Rate</th><th>Min payment</th><th>Due day</th><th></th></tr></thead><tbody>
+  ${S.debts.map(d=>{const moInterest=(d.balance*d.rate/100)/12;const payoff=d.payment>moInterest?Math.ceil(d.balance/(d.payment-moInterest)):null;
+    return`<tr><td style="font-weight:600">${d.name}</td><td><span class="badge badge-red">${d.type}</span></td>
+    <td>${fmtGBP(d.balance)}</td><td>${d.rate}%</td><td>${fmtGBP(d.payment)}/mo</td>
+    <td>Day ${d.dueDay}</td>
+    <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="updateDebtBal('${d.id}')"><i class="ti ti-edit"></i></button><button class="btn btn-danger btn-sm" onclick="deleteDebt('${d.id}')"><i class="ti ti-trash"></i></button></td></tr>`;}).join('')}</tbody></table>`;
+}
+
+// ===== BILLS =====
+function saveBill(){
+  const name=document.getElementById('bill-name').value.trim();if(!name)return;
+  S.bills.push({id:uid(),name,amount:parseFloat(document.getElementById('bill-amount').value)||0,date:document.getElementById('bill-date').value,cat:document.getElementById('bill-cat').value,recurring:document.getElementById('bill-recurring').checked,paid:false});
+  closeModal('billModal');document.getElementById('bill-name').value='';document.getElementById('bill-amount').value='';
+  save();renderBills();
+}
+function deleteBill(id){S.bills=S.bills.filter(b=>b.id!==id);save();renderBills();}
+function toggleBillPaid(id){const b=S.bills.find(x=>x.id===id);if(b){b.paid=!b.paid;save();renderBills();}}
+function renderBills(){
+  const mn=today().slice(0,7);
+  const dueMo=S.bills.filter(b=>b.date&&b.date.startsWith(mn));
+  const totalDue=dueMo.reduce((s,b)=>s+b.amount,0);
+  const overdue=S.bills.filter(b=>!b.paid&&b.date&&b.date<today()).length;
+  document.getElementById('bill-due').textContent=dueMo.length;
+  document.getElementById('bill-total').textContent=fmtGBP0(totalDue);
+  document.getElementById('bill-overdue').textContent=overdue;
+  const el=document.getElementById('bill-list');if(!el)return;
+  if(!S.bills.length){el.innerHTML='<div class="empty-state"><i class="ti ti-receipt"></i>No bills added yet</div>';return;}
+  const sorted=[...S.bills].sort((a,b)=>a.date.localeCompare(b.date));
+  el.innerHTML=`<table><thead><tr><th>Name</th><th>Amount</th><th>Due</th><th>Category</th><th>Status</th><th></th></tr></thead><tbody>
+  ${sorted.map(b=>{const overdue=!b.paid&&b.date<today();
+    return`<tr style="opacity:${b.paid?0.6:1}">
+    <td style="font-weight:600">${b.name}${b.recurring?'<span style="font-size:10px;color:var(--muted);margin-left:6px">↻ recurring</span>':''}</td>
+    <td>${fmtGBP(b.amount)}</td><td style="color:${overdue?'var(--red)':'var(--text)'}">${b.date}</td>
+    <td><span class="badge badge-blue">${b.cat}</span></td>
+    <td><span class="badge ${b.paid?'badge-green':overdue?'badge-red':'badge-amber'}">${b.paid?'Paid':overdue?'Overdue':'Pending'}</span></td>
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-sm" onclick="toggleBillPaid('${b.id}')">${b.paid?'Unpaid':'Mark paid'}</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteBill('${b.id}')"><i class="ti ti-trash"></i></button>
+    </td></tr>`;}).join('')}</tbody></table>`;
 }
 
 // ===== SUBSCRIPTIONS =====
 function saveSubscription(){
   const name=document.getElementById('sub-name').value.trim();if(!name)return;
-  const amount=parseFloat(document.getElementById('sub-amount').value)||0;
-  const freq=document.getElementById('sub-freq').value;
-  const cat=document.getElementById('sub-cat').value;
-  const date=document.getElementById('sub-date').value;
-  const accountId=document.getElementById('sub-account').value;
-  const recurring=document.getElementById('sub-recurring').checked;
-  S.subscriptions.push({id:uid(),name,amount,freq,cat,date,accountId,active:true,recurring,lastProcessed:null});
+  S.subscriptions.push({id:uid(),name,amount:parseFloat(document.getElementById('sub-amount').value)||0,freq:document.getElementById('sub-freq').value,cat:document.getElementById('sub-cat').value,date:document.getElementById('sub-date').value,accountId:document.getElementById('sub-account').value,active:true,recurring:document.getElementById('sub-recurring').checked,lastProcessed:null});
   closeModal('subModal');document.getElementById('sub-name').value='';document.getElementById('sub-amount').value='';
   save();renderSubscriptions();
 }
@@ -859,11 +1080,8 @@ function checkRecurringSubscriptions(){
     if(!s.active||!s.recurring||!s.date||!s.accountId)return;
     if(s.date<=td&&s.lastProcessed!==s.date){
       const exists=S.transactions.some(t=>t.description===s.name&&t.date===s.date&&t.type==='expense');
-      if(!exists){
-        applyTxToAccount('expense',s.accountId,null,s.amount);
-        S.transactions.push({id:uid(),date:s.date,type:'expense',amount:s.amount,accountId:s.accountId,description:s.name,category:'Bills',fromSubscription:true});
-        s.lastProcessed=s.date;
-      }
+      if(!exists){applyTxToAccount('expense',s.accountId,null,s.amount);S.transactions.push({id:uid(),date:s.date,type:'expense',amount:s.amount,accountId:s.accountId,description:s.name,category:'Bills',fromSubscription:true});}
+      s.lastProcessed=s.date;
     }
   });
 }
@@ -878,14 +1096,11 @@ function renderSubscriptions(){
   document.getElementById('sub-due').textContent=due;
   const el=document.getElementById('sub-list');if(!el)return;
   if(!S.subscriptions.length){el.innerHTML='<div class="empty-state"><i class="ti ti-refresh"></i>No subscriptions yet</div>';return;}
-  el.innerHTML=`<table><thead><tr><th>Name</th><th>Amount</th><th>Frequency</th><th>Next billing</th><th>Monthly</th><th>Recurring</th><th>Status</th><th></th></tr></thead><tbody>
+  el.innerHTML=`<table><thead><tr><th>Name</th><th>Amount</th><th>Freq</th><th>Next billing</th><th>Monthly</th><th>Status</th><th></th></tr></thead><tbody>
   ${S.subscriptions.map(s=>`<tr style="opacity:${s.active?1:0.5}">
-    <td style="font-weight:600">${s.name}</td>
-    <td>${fmtGBP(s.amount)}</td>
+    <td style="font-weight:600">${s.name}</td><td>${fmtGBP(s.amount)}</td>
     <td><span class="badge badge-accent">${s.freq}</span></td>
-    <td style="color:var(--muted)">${s.date||'—'}</td>
-    <td>${fmtGBP(toMonthly(s))}</td>
-    <td><span class="badge ${s.recurring?'badge-green':'badge-amber'}">${s.recurring?'Auto':'Manual'}</span></td>
+    <td style="color:var(--muted)">${s.date||'—'}</td><td>${fmtGBP(toMonthly(s))}</td>
     <td><span class="badge ${s.active?'badge-green':'badge-amber'}">${s.active?'Active':'Paused'}</span></td>
     <td style="display:flex;gap:4px">
       <button class="btn btn-sm" onclick="toggleSub('${s.id}')"><i class="ti ti-${s.active?'pause':'player-play'}"></i></button>
@@ -895,45 +1110,31 @@ function renderSubscriptions(){
 
 // ===== FINANCE =====
 function networth(){return S.accounts.reduce((s,a)=>s+a.balance,0)+S.investments.reduce((s,i)=>s+i.value,0);}
-function recordNetworth(){
-  const v=networth(),d=today();
-  const last=S.networthHistory[S.networthHistory.length-1];
-  if(last&&last.date===d)S.networthHistory[S.networthHistory.length-1]={date:d,value:v};
-  else S.networthHistory.push({date:d,value:v});
-}
+function recordNetworth(){const v=networth(),d=today();const last=S.networthHistory[S.networthHistory.length-1];if(last&&last.date===d)S.networthHistory[S.networthHistory.length-1]={date:d,value:v};else S.networthHistory.push({date:d,value:v});}
 function saveAccount(){
   const name=document.getElementById('acc-name').value.trim();if(!name)return;
-  const bal=parseFloat(document.getElementById('acc-balance').value)||0;
-  const type=document.getElementById('acc-type').value;
-  S.accounts.push({id:uid(),name,type,balance:bal});
-  recordNetworth();closeModal('accountModal');
-  document.getElementById('acc-name').value='';document.getElementById('acc-balance').value='';
+  S.accounts.push({id:uid(),name,type:document.getElementById('acc-type').value,balance:parseFloat(document.getElementById('acc-balance').value)||0});
+  recordNetworth();closeModal('accountModal');document.getElementById('acc-name').value='';document.getElementById('acc-balance').value='';
   save();populateAccSelects();renderFinance();renderDashboard();
 }
 function saveInvestment(){
   const name=document.getElementById('inv-name').value.trim();if(!name)return;
   S.investments.push({id:uid(),name,type:document.getElementById('inv-type').value,value:parseFloat(document.getElementById('inv-value').value)||0,cost:parseFloat(document.getElementById('inv-cost').value)||0});
-  recordNetworth();closeModal('investmentModal');
-  document.getElementById('inv-name').value='';document.getElementById('inv-value').value='';document.getElementById('inv-cost').value='';
+  recordNetworth();closeModal('investmentModal');document.getElementById('inv-name').value='';document.getElementById('inv-value').value='';document.getElementById('inv-cost').value='';
   save();renderFinance();
 }
-function saveGoal(){
-  const name=document.getElementById('goal-name').value.trim();if(!name)return;
-  S.goals.push({id:uid(),name,target:parseFloat(document.getElementById('goal-target').value)||0,current:parseFloat(document.getElementById('goal-current').value)||0,date:document.getElementById('goal-date').value});
-  closeModal('goalModal');save();renderFinance();
+function saveFinGoal(){
+  const name=document.getElementById('fgoal-name').value.trim();if(!name)return;
+  S.fingoals.push({id:uid(),name,target:parseFloat(document.getElementById('fgoal-target').value)||0,current:parseFloat(document.getElementById('fgoal-current').value)||0,date:document.getElementById('fgoal-date').value});
+  closeModal('fingoalModal');save();renderFinance();
 }
 function deleteAccount(id){S.accounts=S.accounts.filter(a=>a.id!==id);save();populateAccSelects();renderFinance();}
 function deleteInvestment(id){S.investments=S.investments.filter(i=>i.id!==id);save();renderFinance();}
-function deleteGoal(id){S.goals=S.goals.filter(g=>g.id!==id);save();renderFinance();}
+function deleteFinGoal(id){S.fingoals=S.fingoals.filter(g=>g.id!==id);save();renderFinance();}
 function editAccBal(id){const a=S.accounts.find(x=>x.id===id);if(!a)return;const v=prompt('Update balance for '+a.name+' (£):',a.balance);if(v===null)return;a.balance=parseFloat(v)||0;recordNetworth();save();renderFinance();}
 function editInvVal(id){const i=S.investments.find(x=>x.id===id);if(!i)return;const v=prompt('Update value for '+i.name+' (£):',i.value);if(v===null)return;i.value=parseFloat(v)||0;recordNetworth();save();renderFinance();}
-function editGoalCur(id){const g=S.goals.find(x=>x.id===id);if(!g)return;const v=prompt('Update saved amount (£):',g.current);if(v===null)return;g.current=parseFloat(v)||0;save();renderFinance();}
-function setFinTab(t,el){
-  S.finTab=t;
-  document.querySelectorAll('#fin-tabs .tab').forEach(x=>x.classList.remove('active'));
-  if(el)el.classList.add('active');
-  renderFinTab();
-}
+function editFinGoalCur(id){const g=S.fingoals.find(x=>x.id===id);if(!g)return;const v=prompt('Update saved amount (£):',g.current);if(v===null)return;g.current=parseFloat(v)||0;save();renderFinance();}
+function setFinTab(t,el){S.finTab=t;document.querySelectorAll('#fin-tabs .tab').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');renderFinTab();}
 function renderFinance(){
   const nw=networth();
   const savings=S.accounts.filter(a=>['Savings','ISA','Pension'].includes(a.type)).reduce((s,a)=>s+a.balance,0);
@@ -953,54 +1154,53 @@ function renderFinTab(){
     const mn=new Date().toISOString().slice(0,7);
     const income=S.transactions.filter(x=>x.type==='income'&&x.date.startsWith(mn)).reduce((s,x)=>s+x.amount,0);
     const spend=S.transactions.filter(x=>x.type==='expense'&&x.date.startsWith(mn)).reduce((s,x)=>s+x.amount,0);
-    const nw=networth();
     el.innerHTML=`<div class="grid-3" style="margin-bottom:1rem">
       <div class="metric"><div class="metric-label">Month income</div><div class="metric-value" style="color:var(--green)">${fmtGBP0(income)}</div></div>
       <div class="metric"><div class="metric-label">Month expenses</div><div class="metric-value" style="color:var(--red)">${fmtGBP0(spend)}</div></div>
       <div class="metric"><div class="metric-label">Net this month</div><div class="metric-value" style="color:${income-spend>=0?'var(--green)':'var(--red)'}">${fmtGBP0(income-spend)}</div></div>
     </div>
     <div class="grid-2">
-      <div><h3 style="margin-bottom:0.75rem">Net worth trend</h3><div style="position:relative;height:180px"><canvas id="networthChart"></canvas></div></div>
-      <div><h3 style="margin-bottom:0.75rem">Spending by category</h3><div style="position:relative;height:180px"><canvas id="spendChart"></canvas></div></div>
+      <div class="card" style="margin-bottom:0"><h3 style="margin-bottom:0.75rem">Net worth trend</h3><div style="position:relative;height:180px"><canvas id="networthChart"></canvas></div></div>
+      <div class="card" style="margin-bottom:0"><h3 style="margin-bottom:0.75rem">Spending by category</h3><div style="position:relative;height:180px"><canvas id="spendChart"></canvas></div></div>
     </div>`;
     setTimeout(()=>{
-      if(networthChartInst)networthChartInst.destroy();
-      networthChartInst=new Chart(document.getElementById('networthChart'),{type:'line',data:{labels:S.networthHistory.map(e=>e.date.slice(5)),datasets:[{label:'Net worth',data:S.networthHistory.map(e=>e.value),borderColor:'var(--accent)',backgroundColor:'rgba(15,52,96,0.07)',tension:0.3,fill:true,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtGBP0(v)}}}}});
+      destroyChart('networthChart');destroyChart('spendChart');
+      const nc=document.getElementById('networthChart');
+      if(nc)charts['networthChart']=new Chart(nc,{type:'line',data:{labels:S.networthHistory.map(e=>e.date.slice(5)),datasets:[{label:'Net worth',data:S.networthHistory.map(e=>e.value),borderColor:'var(--accent)',backgroundColor:'rgba(15,52,96,0.07)',tension:0.3,fill:true,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmtGBP0(v)}}}}});
       const cats={};S.transactions.filter(x=>x.type==='expense'&&x.date.startsWith(mn)).forEach(x=>{cats[x.category]=(cats[x.category]||0)+x.amount;});
-      if(spendChartInst)spendChartInst.destroy();
-      const sc=document.getElementById('spendChart');if(!sc)return;
-      const labels=Object.keys(cats);const data=Object.values(cats);
-      if(labels.length){spendChartInst=new Chart(sc,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:['#0f3460','#185FA5','#3B6D11','#BA7517','#A32D2D','#0F6E56','#534AB7','#888','#ccc','#444']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11}}}}}});}
-      else{sc.parentElement.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:2rem">No expenses this month</div>';}
+      const sc=document.getElementById('spendChart');
+      const labels=Object.keys(cats);
+      if(sc&&labels.length)charts['spendChart']=new Chart(sc,{type:'doughnut',data:{labels,datasets:[{data:Object.values(cats),backgroundColor:['#0f3460','#185FA5','#3B6D11','#BA7517','#A32D2D','#0F6E56','#534AB7','#888','#ccc','#444']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11}}}}}});
+      else if(sc&&!labels.length)sc.parentElement.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:2rem">No expenses this month</div>';
     },60);
   }else if(t==='accounts'){
     const cur=S.accounts.filter(a=>['Current','Other'].includes(a.type));
     const sav=S.accounts.filter(a=>['Savings','ISA','Pension'].includes(a.type));
-    el.innerHTML=`<div class="section-header"><h3>Current accounts</h3><button class="btn btn-sm" onclick="openModal('accountModal')"><i class="ti ti-plus"></i>Add account</button></div>${accTable(cur)}
+    el.innerHTML=`<div class="section-header"><h3>Current accounts</h3><button class="btn btn-sm" onclick="openModal('accountModal')"><i class="ti ti-plus"></i>Add</button></div>${accTable(cur)}
     <div class="section-header" style="margin-top:1.25rem"><h3>Savings accounts</h3></div>${accTable(sav)}`;
   }else if(t==='savings'){
     const sav=S.accounts.filter(a=>['Savings','ISA','Pension'].includes(a.type));
     el.innerHTML=`<div style="margin-bottom:1rem"><div class="metric" style="display:inline-block"><div class="metric-label">Total savings</div><div class="metric-value">${fmtGBP0(sav.reduce((s,a)=>s+a.balance,0))}</div></div></div>
-    <div class="section-header"><h3>Savings & ISA accounts</h3><button class="btn btn-sm" onclick="document.getElementById('acc-type').value='Savings';openModal('accountModal')"><i class="ti ti-plus"></i>Add</button></div>${accTable(sav)}`;
+    <div class="section-header"><h3>Savings accounts</h3><button class="btn btn-sm" onclick="openModal('accountModal')"><i class="ti ti-plus"></i>Add</button></div>${accTable(sav)}`;
   }else if(t==='investments'){
     el.innerHTML=`<div class="section-header"><h3>Investments</h3><button class="btn btn-sm" onclick="openModal('investmentModal')"><i class="ti ti-plus"></i>Add</button></div>
     ${!S.investments.length?'<div class="empty-state"><i class="ti ti-trending-up"></i>No investments yet</div>':
     `<table><thead><tr><th>Name</th><th>Type</th><th>Value</th><th>Return</th><th></th></tr></thead><tbody>
     ${S.investments.map(i=>{const ret=i.value-i.cost;const pct=i.cost?((ret/i.cost)*100).toFixed(1):0;const pos=ret>=0;
-      return`<tr><td style="font-weight:600">${i.name}</td><td><span class="badge badge-accent">${i.type}</span></td>
-      <td>${fmtGBP(i.value)}</td><td><span class="badge ${pos?'badge-green':'badge-red'}">${pos?'+':''}${fmtGBP(ret)} (${pct}%)</span></td>
+      return`<tr><td style="font-weight:600">${i.name}</td><td><span class="badge badge-accent">${i.type}</span></td><td>${fmtGBP(i.value)}</td>
+      <td><span class="badge ${pos?'badge-green':'badge-red'}">${pos?'+':''}${fmtGBP(ret)} (${pct}%)</span></td>
       <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="editInvVal('${i.id}')"><i class="ti ti-edit"></i></button><button class="btn btn-danger btn-sm" onclick="deleteInvestment('${i.id}')"><i class="ti ti-trash"></i></button></td></tr>`;}).join('')}</tbody></table>`}`;
   }else if(t==='goals'){
-    el.innerHTML=`<div class="section-header"><h3>Savings goals</h3><button class="btn btn-sm" onclick="openModal('goalModal')"><i class="ti ti-plus"></i>Add</button></div>
-    ${!S.goals.length?'<div class="empty-state"><i class="ti ti-target"></i>No goals yet</div>':
-    `<div style="display:flex;flex-direction:column;gap:1rem">${S.goals.map(g=>{const pct=Math.min(100,(g.current/g.target)*100);let dl='';if(g.date){const d=Math.ceil((new Date(g.date)-new Date())/864e5);dl=d>0?` · ${d} days left`:' · Past date';}
+    el.innerHTML=`<div class="section-header"><h3>Savings goals</h3><button class="btn btn-sm" onclick="openModal('fingoalModal')"><i class="ti ti-plus"></i>Add</button></div>
+    ${!S.fingoals.length?'<div class="empty-state"><i class="ti ti-target"></i>No goals yet</div>':
+    `<div style="display:flex;flex-direction:column;gap:1rem">${S.fingoals.map(g=>{const pct=Math.min(100,(g.current/g.target)*100);let dl='';if(g.date){const d=Math.ceil((new Date(g.date)-new Date())/864e5);dl=d>0?` · ${d} days left`:' · Past date';}
       return`<div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
         <div style="font-weight:600">${g.name}<span style="font-size:11px;color:var(--muted);font-weight:400">${dl}</span></div>
         <div style="display:flex;gap:5px;align-items:center"><span style="font-size:12px;color:var(--muted)">${fmtGBP0(g.current)} / ${fmtGBP0(g.target)}</span>
-        <button class="btn btn-sm" onclick="editGoalCur('${g.id}')"><i class="ti ti-edit"></i></button>
-        <button class="btn btn-danger btn-sm" onclick="deleteGoal('${g.id}')"><i class="ti ti-trash"></i></button></div></div>
+        <button class="btn btn-sm" onclick="editFinGoalCur('${g.id}')"><i class="ti ti-edit"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteFinGoal('${g.id}')"><i class="ti ti-trash"></i></button></div></div>
         <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">${pct.toFixed(0)}% complete · ${fmtGBP0(g.target-g.current)} remaining</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">${pct.toFixed(0)}% · ${fmtGBP0(g.target-g.current)} remaining</div>
       </div>`;}).join('')}</div>`}`;
   }
 }
@@ -1011,24 +1211,176 @@ function accTable(accs){
   <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="editAccBal('${a.id}')"><i class="ti ti-edit"></i></button><button class="btn btn-danger btn-sm" onclick="deleteAccount('${a.id}')"><i class="ti ti-trash"></i></button></td></tr>`).join('')}</tbody></table>`;
 }
 
+// ===== HEALTH METRICS =====
+function saveHealthMetric(){
+  const date=document.getElementById('hm-date').value||today();
+  const weight=parseFloat(document.getElementById('hm-weight').value)||null;
+  const sleep=parseFloat(document.getElementById('hm-sleep').value)||null;
+  const water=parseFloat(document.getElementById('hm-water').value)||null;
+  const hr=parseFloat(document.getElementById('hm-hr').value)||null;
+  const steps=parseFloat(document.getElementById('hm-steps').value)||null;
+  if(!weight&&!sleep&&!water&&!hr&&!steps){alert('Enter at least one metric');return;}
+  const existing=S.healthMetrics.find(m=>m.date===date);
+  if(existing){if(weight)existing.weight=weight;if(sleep)existing.sleep=sleep;if(water)existing.water=water;if(hr)existing.hr=hr;if(steps)existing.steps=steps;}
+  else S.healthMetrics.push({id:uid(),date,weight,sleep,water,hr,steps});
+  ['hm-weight','hm-sleep','hm-water','hm-hr','hm-steps'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  save();renderHealth();
+}
+function deleteHealthMetric(id){S.healthMetrics=S.healthMetrics.filter(m=>m.id!==id);save();renderHealth();}
+function renderHealth(){
+  const sorted=[...S.healthMetrics].sort((a,b)=>a.date.localeCompare(b.date));
+  const last=sorted[sorted.length-1];
+  const avg=(arr,key)=>{const v=arr.filter(x=>x[key]);return v.length?(v.reduce((s,x)=>s+x[key],0)/v.length).toFixed(1):'—';}
+  document.getElementById('hm-latest-weight').textContent=last?.weight?last.weight+'kg':'—';
+  document.getElementById('hm-avg-sleep').textContent=avg(sorted,'sleep')+'hrs';
+  document.getElementById('hm-avg-water').textContent=avg(sorted,'water')+' gl';
+  document.getElementById('hm-avg-hr').textContent=avg(sorted,'hr')+' bpm';
+  const labels=sorted.map(m=>m.date.slice(5));
+  mkChart('weightChart','line',{labels,datasets:[{label:'Weight (kg)',data:sorted.map(m=>m.weight),borderColor:'var(--accent)',backgroundColor:'rgba(15,52,96,0.07)',tension:0.3,fill:true,pointRadius:3,spanGaps:true}]},{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'kg'}}}});
+  mkChart('sleepChart','bar',{labels,datasets:[{label:'Sleep (hrs)',data:sorted.map(m=>m.sleep),backgroundColor:'var(--teal)',borderRadius:4,maxBarThickness:20}]},{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'h'}}}});
+  const logEl=document.getElementById('hm-log');if(!logEl)return;
+  if(!sorted.length){logEl.innerHTML='<div class="empty-state"><i class="ti ti-heart-rate-monitor"></i>No metrics logged yet</div>';return;}
+  logEl.innerHTML=`<table><thead><tr><th>Date</th><th>Weight</th><th>Sleep</th><th>Water</th><th>HR</th><th>Steps</th><th></th></tr></thead><tbody>
+  ${sorted.slice().reverse().map(m=>`<tr><td>${m.date}</td><td>${m.weight?m.weight+'kg':'—'}</td><td>${m.sleep?m.sleep+'h':'—'}</td><td>${m.water?m.water+' gl':'—'}</td><td>${m.hr?m.hr+' bpm':'—'}</td><td>${m.steps?m.steps.toLocaleString():'—'}</td>
+  <td><button class="btn btn-danger btn-sm" onclick="deleteHealthMetric('${m.id}')"><i class="ti ti-trash"></i></button></td></tr>`).join('')}</tbody></table>`;
+}
+
+// ===== WORKOUTS =====
+let currentWorkout={name:'',date:'',type:'',notes:'',exercises:[]};
+function setWorkoutTab(t,el){
+  S.workoutTab=t;document.querySelectorAll('#workout-tabs .tab').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');
+  renderWorkoutTab(t);
+}
+function renderWorkoutTab(t){
+  const el=document.getElementById('workout-tab-content');if(!el)return;
+  if(t==='log'){
+    el.innerHTML=`<div class="card">
+      <h3 style="margin-bottom:1rem">Log a workout</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Workout name</label><input type="text" id="wk-name" placeholder="Push day" value="${currentWorkout.name}"></div>
+        <div class="form-group"><label>Date</label><input type="date" id="wk-date" value="${currentWorkout.date||today()}"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Type</label><select id="wk-type"><option>Strength</option><option>Cardio</option><option>HIIT</option><option>Flexibility</option><option>Sport</option><option>Other</option></select></div>
+        <div class="form-group"><label>Duration (mins)</label><input type="number" id="wk-duration" placeholder="60"></div>
+      </div>
+      <div class="form-group"><label>Notes</label><textarea id="wk-notes" rows="2" placeholder="How did it go?"></textarea></div>
+      <div class="section-header" style="margin-top:1rem"><h3>Exercises</h3><button class="btn btn-sm" onclick="addExercise()"><i class="ti ti-plus"></i>Add exercise</button></div>
+      <div id="exercise-list">${currentWorkout.exercises.map((ex,i)=>exerciseHTML(ex,i)).join('')}</div>
+      <div style="margin-top:1rem"><button class="btn btn-accent" onclick="saveWorkout()"><i class="ti ti-check"></i>Save workout</button></div>
+    </div>`;
+  }else if(t==='plan'){
+    el.innerHTML=`<div class="card">
+      <div class="section-header"><h3>Workout plans</h3><button class="btn btn-accent" onclick="openPlanForm()"><i class="ti ti-plus"></i>Add plan</button></div>
+      <div id="plan-list">${renderPlanList()}</div>
+    </div>`;
+  }else if(t==='history'){
+    el.innerHTML=`<div class="card">
+      <h3 style="margin-bottom:1rem">Workout history</h3>
+      <div class="grid-3" style="margin-bottom:1rem">
+        <div class="metric"><div class="metric-label">Total workouts</div><div class="metric-value">${S.workouts.length}</div></div>
+        <div class="metric"><div class="metric-label">This month</div><div class="metric-value">${S.workouts.filter(w=>w.date.startsWith(new Date().toISOString().slice(0,7))).length}</div></div>
+        <div class="metric"><div class="metric-label">Total exercises logged</div><div class="metric-value">${S.workouts.reduce((s,w)=>s+w.exercises.length,0)}</div></div>
+      </div>
+      ${!S.workouts.length?'<div class="empty-state"><i class="ti ti-barbell"></i>No workouts logged yet</div>':
+      [...S.workouts].reverse().map(w=>`<div style="border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:0.75rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
+          <div><div style="font-weight:700;font-size:15px">${w.name}</div><div style="font-size:12px;color:var(--muted)">${w.date} · ${w.type}${w.duration?' · '+w.duration+'min':''}</div></div>
+          <button class="btn btn-danger btn-sm" onclick="deleteWorkout('${w.id}')"><i class="ti ti-trash"></i></button>
+        </div>
+        ${w.exercises.length?`<div style="margin-top:0.5rem">${w.exercises.map(ex=>`<div style="font-size:13px;padding:4px 0;border-bottom:0.5px solid var(--border)">
+          <span style="font-weight:600">${ex.name}</span> —
+          ${ex.sets.map(s=>`${s.reps} reps × ${s.weight}kg`).join(', ')}
+        </div>`).join('')}</div>`:''}
+        ${w.notes?`<div style="font-size:12px;color:var(--muted);margin-top:6px">${w.notes}</div>`:''}
+      </div>`).join('')}
+    </div>`;
+  }
+}
+function exerciseHTML(ex,i){
+  return`<div class="workout-exercise" id="ex-${i}">
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+      <input type="text" placeholder="Exercise name (e.g. Bench press)" value="${ex.name}" oninput="updateExerciseName(${i},this.value)" style="flex:1">
+      <button class="btn btn-danger btn-sm" onclick="removeExercise(${i})"><i class="ti ti-trash"></i></button>
+    </div>
+    <div id="sets-${i}">${ex.sets.map((s,si)=>setHTML(i,si,s)).join('')}</div>
+    <button class="btn btn-sm" onclick="addSet(${i})" style="margin-top:6px"><i class="ti ti-plus"></i>Add set</button>
+  </div>`;
+}
+function setHTML(ei,si,s){return`<div class="set-row"><span style="font-size:12px;color:var(--muted);width:50px">Set ${si+1}</span><input type="number" placeholder="Reps" value="${s.reps||''}" oninput="updateSet(${ei},${si},'reps',this.value)" style="width:70px"><span style="font-size:12px;color:var(--muted);margin:0 4px">×</span><input type="number" placeholder="kg" value="${s.weight||''}" oninput="updateSet(${ei},${si},'weight',this.value)" style="width:70px"><span style="font-size:12px;color:var(--muted);margin-left:4px">kg</span><button class="btn btn-danger btn-sm btn-xs" onclick="removeSet(${ei},${si})" style="margin-left:4px"><i class="ti ti-minus"></i></button></div>`;}
+function addExercise(){currentWorkout.exercises.push({name:'',sets:[{reps:'',weight:''}]});refreshExerciseList();}
+function removeExercise(i){currentWorkout.exercises.splice(i,1);refreshExerciseList();}
+function updateExerciseName(i,v){if(currentWorkout.exercises[i])currentWorkout.exercises[i].name=v;}
+function addSet(ei){if(currentWorkout.exercises[ei])currentWorkout.exercises[ei].sets.push({reps:'',weight:''});refreshExerciseList();}
+function removeSet(ei,si){if(currentWorkout.exercises[ei])currentWorkout.exercises[ei].sets.splice(si,1);refreshExerciseList();}
+function updateSet(ei,si,field,val){if(currentWorkout.exercises[ei]&&currentWorkout.exercises[ei].sets[si])currentWorkout.exercises[ei].sets[si][field]=val;}
+function refreshExerciseList(){const el=document.getElementById('exercise-list');if(el)el.innerHTML=currentWorkout.exercises.map((ex,i)=>exerciseHTML(ex,i)).join('');}
+function saveWorkout(){
+  const name=document.getElementById('wk-name')?.value.trim();if(!name){alert('Enter a workout name');return;}
+  const workout={id:uid(),name,date:document.getElementById('wk-date').value||today(),type:document.getElementById('wk-type').value,duration:parseFloat(document.getElementById('wk-duration').value)||null,notes:document.getElementById('wk-notes').value.trim(),exercises:currentWorkout.exercises.filter(ex=>ex.name)};
+  S.workouts.push(workout);currentWorkout={name:'',date:'',type:'',notes:'',exercises:[]};
+  save();alert('Workout saved!');setWorkoutTab('history',document.querySelector('#workout-tabs .tab:last-child'));
+}
+function deleteWorkout(id){S.workouts=S.workouts.filter(w=>w.id!==id);save();renderWorkoutTab('history');}
+function openPlanForm(){
+  const el=document.getElementById('plan-list');if(!el)return;
+  el.innerHTML=`<div style="border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
+    <div class="form-row">
+      <div class="form-group"><label>Plan name</label><input type="text" id="plan-name" placeholder="5-day split"></div>
+      <div class="form-group"><label>Days per week</label><input type="number" id="plan-days" placeholder="5" min="1" max="7"></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="plan-desc" rows="2" placeholder="Push, pull, legs..."></textarea></div>
+    <button class="btn btn-accent" onclick="savePlan()"><i class="ti ti-check"></i>Save plan</button>
+    <button class="btn" onclick="renderWorkoutTab('plan')" style="margin-left:8px">Cancel</button>
+  </div>${renderPlanList()}`;
+}
+function savePlan(){
+  const name=document.getElementById('plan-name')?.value.trim();if(!name)return;
+  S.workoutPlans.push({id:uid(),name,days:parseInt(document.getElementById('plan-days').value)||0,desc:document.getElementById('plan-desc').value.trim()});
+  save();renderWorkoutTab('plan');
+}
+function deletePlan(id){S.workoutPlans=S.workoutPlans.filter(p=>p.id!==id);save();renderWorkoutTab('plan');}
+function renderPlanList(){
+  if(!S.workoutPlans.length)return'<div class="empty-state"><i class="ti ti-barbell"></i>No plans yet</div>';
+  return S.workoutPlans.map(p=>`<div style="border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:0.75rem;display:flex;align-items:flex-start;gap:10px">
+    <div style="flex:1"><div style="font-weight:700">${p.name}</div><div style="font-size:12px;color:var(--muted)">${p.days} days/week${p.desc?' · '+p.desc:''}</div></div>
+    <button class="btn btn-danger btn-sm" onclick="deletePlan('${p.id}')"><i class="ti ti-trash"></i></button>
+  </div>`).join('');
+}
+
+// ===== MOOD =====
+function selectMood(val){
+  S.selectedMood=val;
+  document.querySelectorAll('.mood-btn').forEach((b,i)=>b.classList.toggle('selected',i+1===val));
+}
+function saveMood(){
+  if(!S.selectedMood){alert('Select a mood first');return;}
+  const date=today();
+  const existing=S.moodLogs.find(m=>m.date===date);
+  const entry={id:uid(),date,mood:S.selectedMood,note:document.getElementById('mood-note').value.trim()};
+  if(existing)Object.assign(existing,entry);else S.moodLogs.push(entry);
+  document.getElementById('mood-note').value='';S.selectedMood=0;
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  save();renderMood();
+}
+function renderMood(){
+  const sorted=[...S.moodLogs].sort((a,b)=>a.date.localeCompare(b.date));
+  const last30=sorted.slice(-30);
+  mkChart('moodChart','line',{labels:last30.map(m=>m.date.slice(5)),datasets:[{label:'Mood',data:last30.map(m=>m.mood),borderColor:'var(--accent)',backgroundColor:'rgba(15,52,96,0.07)',tension:0.3,fill:true,pointRadius:4}]},{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:1,max:5,ticks:{callback:v=>MOOD_EMOJIS[v]||v}}}});
+  const logEl=document.getElementById('mood-log');if(!logEl)return;
+  if(!sorted.length){logEl.innerHTML='<div class="empty-state"><i class="ti ti-mood-smile"></i>No mood entries yet</div>';return;}
+  logEl.innerHTML=sorted.slice().reverse().slice(0,10).map(m=>`<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)">
+    <span style="font-size:22px">${MOOD_EMOJIS[m.mood]}</span>
+    <div style="flex:1"><div style="font-weight:600;font-size:13px">${['','Awful','Bad','Okay','Good','Great'][m.mood]}</div>${m.note?`<div style="font-size:12px;color:var(--muted)">${m.note}</div>`:''}</div>
+    <span style="font-size:11px;color:var(--muted)">${m.date}</span>
+  </div>`).join('');
+}
+
 // ===== HABITS =====
-function isScheduled(h,dateStr){
-  if(h.start&&dateStr<h.start)return false;
-  const dow=new Date(dateStr+'T12:00:00').getDay();
-  return!h.days||h.days.length===0||h.days.includes(dow);
-}
-function getStreak(habitId){
-  const h=S.habits.find(x=>x.id===habitId);if(!h)return 0;
-  const logs=S.habitLogs[habitId]||{};let streak=0;let d=new Date();
-  for(let i=0;i<365;i++){const key=d.toISOString().slice(0,10);if(!isScheduled(h,key)){d.setDate(d.getDate()-1);continue;}if(logs[key])streak++;else break;d.setDate(d.getDate()-1);}
-  return streak;
-}
+function isScheduled(h,dateStr){if(h.start&&dateStr<h.start)return false;const dow=new Date(dateStr+'T12:00:00').getDay();return!h.days||h.days.length===0||h.days.includes(dow);}
+function getStreak(habitId){const h=S.habits.find(x=>x.id===habitId);if(!h)return 0;const logs=S.habitLogs[habitId]||{};let streak=0;let d=new Date();for(let i=0;i<365;i++){const key=d.toISOString().slice(0,10);if(!isScheduled(h,key)){d.setDate(d.getDate()-1);continue;}if(logs[key])streak++;else break;d.setDate(d.getDate()-1);}return streak;}
 function getWeekDates(){const dates=[];const d=new Date();for(let i=6;i>=0;i--){const x=new Date(d);x.setDate(d.getDate()-i);dates.push(x.toISOString().slice(0,10));}return dates;}
-function toggleHabit(habitId,date){
-  if(!S.habitLogs[habitId])S.habitLogs[habitId]={};
-  S.habitLogs[habitId][date]=!S.habitLogs[habitId][date];
-  save();renderHabits();renderDashboard();
-}
+function toggleHabit(habitId,date){if(!S.habitLogs[habitId])S.habitLogs[habitId]={};S.habitLogs[habitId][date]=!S.habitLogs[habitId][date];save();renderHabits();renderDashboard();}
 function saveHabit(){
   const name=document.getElementById('hab-name').value.trim();if(!name)return;
   const icon=document.querySelector('#icon-picker .chip.selected')?.dataset.icon||'🏃';
@@ -1063,46 +1415,33 @@ function renderHabits(){
     </div>
     ${S.habits.map(h=>{const streak=getStreak(h.id);return`<div style="display:grid;grid-template-columns:150px 1fr 80px 32px;gap:6px;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--border)">
       <div style="display:flex;align-items:center;gap:5px"><span>${h.icon}</span><span style="font-weight:600;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</span></div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px">${weekDates.map(d=>{const sc=isScheduled(h,d);const done=(S.habitLogs[h.id]||{})[d];
-        return`<div style="aspect-ratio:1;border-radius:3px;border:0.5px solid ${done?h.color:'var(--border)'};background:${done?h.color:sc?'var(--bg)':'transparent'};cursor:${sc?'pointer':'default'};opacity:${sc?1:0.2}" onclick="${sc?`toggleHabit('${h.id}','${d}')`:''}" title="${d}"></div>`;}).join('')}</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px">${weekDates.map(d=>{const sc=isScheduled(h,d);const done=(S.habitLogs[h.id]||{})[d];return`<div style="aspect-ratio:1;border-radius:3px;border:0.5px solid ${done?h.color:'var(--border)'};background:${done?h.color:sc?'var(--bg)':'transparent'};cursor:${sc?'pointer':'default'};opacity:${sc?1:0.2}" onclick="${sc?`toggleHabit('${h.id}','${d}')`:''}" title="${d}"></div>`;}).join('')}</div>
       <div style="text-align:center;font-size:12px;font-weight:600">${streak}${streak>=3?' 🔥':''}</div>
       <button class="btn btn-danger btn-sm" onclick="deleteHabit('${h.id}')"><i class="ti ti-trash"></i></button>
     </div>`;}).join('')}</div>`;
-
-  // Compact monthly view
   document.getElementById('hab-month-title').textContent=MONTHS[S.habMonthMonth]+' '+S.habMonthYear;
   const mEl=document.getElementById('hab-month-view');if(!mEl)return;
   if(!S.habits.length){mEl.innerHTML='<div style="color:var(--muted);font-size:13px">Add habits first</div>';return;}
   const yr=S.habMonthYear,mo=S.habMonthMonth;
-  const dim=new Date(yr,mo+1,0).getDate();
-  const fd=(new Date(yr,mo,1).getDay()+6)%7;
-  // Compact: show all habits in one grid, each row = habit, each col = day
-  const dayNums=Array.from({length:dim},(_,i)=>i+1);
-  mEl.innerHTML=`<div style="overflow-x:auto">
-    <table style="font-size:10px;border-collapse:separate;border-spacing:2px">
-      <thead><tr><th style="text-align:left;padding:2px 6px;min-width:80px">Habit</th>
-        ${Array(fd).fill(0).map(()=>'<th></th>').join('')}
-        ${dayNums.map(d=>`<th style="text-align:center;width:22px;color:var(--muted);font-weight:500">${d}</th>`).join('')}
-      </tr></thead>
-      <tbody>${S.habits.map(h=>`<tr><td style="padding:2px 6px;font-weight:600;white-space:nowrap">${h.icon} ${h.name}</td>
-        ${Array(fd).fill(0).map(()=>'<td></td>').join('')}
-        ${dayNums.map(d=>{const ds=`${yr}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-          const sc=isScheduled(h,ds);const done=(S.habitLogs[h.id]||{})[ds];const fut=ds>today();
-          let bg='transparent',border='transparent';
-          if(sc){if(done){bg=h.color;border=h.color;}else if(!fut){bg='var(--red-light)';border='var(--red)';}else{bg='var(--bg)';border='var(--border)';}}
-          return`<td><div style="width:20px;height:20px;border-radius:3px;border:0.5px solid ${border};background:${bg};cursor:${sc&&!fut?'pointer':'default'}" onclick="${sc&&!fut?`toggleHabit('${h.id}','${ds}')`:''}" title="${ds}"></div></td>`;}).join('')}
-      </tr>`).join('')}</tbody>
-    </table>
-  </div>`;
-
+  const dim=new Date(yr,mo+1,0).getDate();const fd=(new Date(yr,mo,1).getDay()+6)%7;
+  mEl.innerHTML=`<div style="overflow-x:auto"><table style="font-size:10px;border-collapse:separate;border-spacing:2px"><thead><tr>
+    <th style="text-align:left;padding:2px 6px;min-width:80px;font-size:10px">Habit</th>
+    ${Array(fd).fill(0).map(()=>'<th></th>').join('')}
+    ${Array.from({length:dim},(_,i)=>`<th style="text-align:center;width:22px;color:var(--muted);font-weight:500">${i+1}</th>`).join('')}
+  </tr></thead><tbody>
+  ${S.habits.map(h=>`<tr><td style="padding:2px 6px;font-weight:600;white-space:nowrap">${h.icon} ${h.name}</td>
+    ${Array(fd).fill(0).map(()=>'<td></td>').join('')}
+    ${Array.from({length:dim},(_,i)=>{const d=i+1;const ds=`${yr}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const sc=isScheduled(h,ds);const done=(S.habitLogs[h.id]||{})[ds];const fut=ds>today();
+      let bg='transparent',border='transparent';
+      if(sc){if(done){bg=h.color;border=h.color;}else if(!fut){bg='var(--red-light)';border='var(--red)';}else{bg='var(--bg)';border='var(--border)';}}
+      return`<td><div style="width:20px;height:20px;border-radius:3px;border:0.5px solid ${border};background:${bg};cursor:${sc&&!fut?'pointer':'default'}" onclick="${sc&&!fut?`toggleHabit('${h.id}','${ds}')`:''}" title="${ds}"></div></td>`;}).join('')}
+  </tr>`).join('')}</tbody></table></div>`;
   const dayTotals=weekDates.map(d=>S.habits.filter(h=>isScheduled(h,d)&&(S.habitLogs[h.id]||{})[d]).length);
-  if(habitChartInst)habitChartInst.destroy();
-  const hc=document.getElementById('habitWeekChart');if(!hc)return;
-  habitChartInst=new Chart(hc,{type:'bar',data:{labels:dl,datasets:[{label:'Done',data:dayTotals,backgroundColor:'var(--accent)',borderRadius:5,maxBarThickness:32}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:Math.max(S.habits.length,1),ticks:{stepSize:1}}}}});
+  mkChart('habitWeekChart','bar',{labels:dl,datasets:[{label:'Done',data:dayTotals,backgroundColor:'var(--accent)',borderRadius:5,maxBarThickness:32}]},{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:Math.max(S.habits.length,1),ticks:{stepSize:1}}}});
   const tEl=document.getElementById('habit-table');if(!tEl)return;
   tEl.innerHTML=`<table><thead><tr><th>Habit</th><th>This week</th><th>Streak</th></tr></thead><tbody>
-  ${S.habits.map(h=>{const sc=weekDates.filter(d=>isScheduled(h,d)).length;const done=weekDates.filter(d=>isScheduled(h,d)&&(S.habitLogs[h.id]||{})[d]).length;const pct=sc?Math.round(done/sc*100):0;const s=getStreak(h.id);
-    return`<tr><td>${h.icon} ${h.name}</td><td><div style="font-size:11px;margin-bottom:2px">${done}/${sc} (${pct}%)</div><div class="progress-bar" style="width:70px"><div class="progress-fill" style="width:${pct}%;background:${h.color}"></div></div></td><td>${s}${s>=3?' 🔥':''}</td></tr>`;}).join('')}</tbody></table>`;
+  ${S.habits.map(h=>{const sc=weekDates.filter(d=>isScheduled(h,d)).length;const done=weekDates.filter(d=>isScheduled(h,d)&&(S.habitLogs[h.id]||{})[d]).length;const pct=sc?Math.round(done/sc*100):0;const s=getStreak(h.id);return`<tr><td>${h.icon} ${h.name}</td><td><div style="font-size:11px;margin-bottom:2px">${done}/${sc} (${pct}%)</div><div class="progress-bar" style="width:70px"><div class="progress-fill" style="width:${pct}%;background:${h.color}"></div></div></td><td>${s}${s>=3?' 🔥':''}</td></tr>`;}).join('')}</tbody></table>`;
 }
 
 // ===== TODOS =====
@@ -1125,17 +1464,13 @@ function saveTask(){
   closeModal('taskModal');save();renderTodos();
 }
 function completeTask(id){const t=S.tasks.find(x=>x.id===id);if(!t)return;t.completedAt=today();S.completedTasks.push(t);S.tasks=S.tasks.filter(x=>x.id!==id);save();renderTodos();renderDashboard();}
-function uncompleteTask(id){
-  const t=S.completedTasks.find(x=>x.id===id);if(!t)return;
-  delete t.completedAt;S.tasks.push(t);S.completedTasks=S.completedTasks.filter(x=>x.id!==id);
-  save();renderTodos();renderDashboard();
-}
+function uncompleteTask(id){const t=S.completedTasks.find(x=>x.id===id);if(!t)return;delete t.completedAt;S.tasks.push(t);S.completedTasks=S.completedTasks.filter(x=>x.id!==id);save();renderTodos();renderDashboard();}
 function deleteTask(id){S.tasks=S.tasks.filter(t=>t.id!==id);save();renderTodos();}
 function deleteCompleted(id){S.completedTasks=S.completedTasks.filter(t=>t.id!==id);save();renderTodos();}
 function setTodoView(v){S.currentList=null;S.todoView=v;renderTodos();}
 function setListView(id){S.currentList=id;S.todoView='list';renderTodos();}
 function priorityBadge(p){if(p==='high')return'<span class="badge badge-red">High</span>';if(p==='low')return'<span class="badge badge-teal">Low</span>';return'';}
-function taskItem(t){return`<div class="todo-item"><div class="todo-check" onclick="completeTask('${t.id}')"></div><div class="todo-text" style="flex:1">${t.text}${t.due?`<span style="font-size:11px;color:var(--muted);margin-left:8px"><i class="ti ti-calendar" style="font-size:11px"></i> ${t.due}</span>`:''}${t.priority&&t.priority!=='normal'?'&nbsp;'+priorityBadge(t.priority):''}</div><button class="btn btn-danger btn-sm" onclick="deleteTask('${t.id}')"><i class="ti ti-trash"></i></button></div>`;}
+function taskItem(t){return`<div class="todo-item"><div class="todo-check" onclick="completeTask('${t.id}')"></div><div style="flex:1">${t.text}${t.due?`<span style="font-size:11px;color:var(--muted);margin-left:8px"><i class="ti ti-calendar" style="font-size:11px"></i> ${t.due}</span>`:''}${t.priority&&t.priority!=='normal'?'&nbsp;'+priorityBadge(t.priority):''}</div><button class="btn btn-danger btn-sm" onclick="deleteTask('${t.id}')"><i class="ti ti-trash"></i></button></div>`;}
 function renderTodos(){
   const tabsEl=document.getElementById('list-tabs');if(!tabsEl)return;
   tabsEl.innerHTML=S.lists.map(l=>`<button class="btn ${S.currentList===l.id&&S.todoView==='list'?'btn-accent':''}" onclick="setListView('${l.id}')">${l.icon} ${l.name}</button>`).join('');
@@ -1154,7 +1489,7 @@ function renderTodos(){
       ${!S.completedTasks.length?'<div class="empty-state"><i class="ti ti-circle-check"></i>No completed tasks yet</div>':
       S.completedTasks.slice().reverse().map(t=>`<div class="todo-item">
         <div class="todo-check done" onclick="uncompleteTask('${t.id}')" title="Uncheck"><i class="ti ti-check" style="font-size:11px"></i></div>
-        <div class="todo-text done" style="flex:1">${t.text}${t.due?`<span style="font-size:11px;color:var(--muted);margin-left:8px">Due ${t.due}</span>`:''}</div>
+        <div style="flex:1" class="todo-text done">${t.text}</div>
         <div style="font-size:11px;color:var(--muted);margin-right:8px">Done ${t.completedAt||''}</div>
         <button class="btn btn-danger btn-sm" onclick="deleteCompleted('${t.id}')"><i class="ti ti-trash"></i></button>
       </div>`).join('')}</div>`;return;
@@ -1165,6 +1500,102 @@ function renderTodos(){
   content.innerHTML=`<div class="card"><div class="section-header"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">${l.icon}</span><span style="font-weight:600;font-size:17px">${l.name}</span><span class="badge badge-accent">${tasks.length}</span></div>
     <div style="display:flex;gap:5px"><button class="btn btn-sm" onclick="editList('${l.id}')"><i class="ti ti-edit"></i>Edit</button><button class="btn btn-danger btn-sm" onclick="deleteList('${l.id}')"><i class="ti ti-trash"></i>Delete</button><button class="btn btn-accent btn-sm" onclick="openAddTask('${l.id}')"><i class="ti ti-plus"></i>Add task</button></div></div>
     ${tasks.length?tasks.map(t=>taskItem(t)).join(''):'<div class="empty-state" style="padding:2rem"><i class="ti ti-clipboard"></i>This list is empty</div>'}</div>`;
+}
+
+// ===== LIFE GOALS =====
+function saveLifeGoal(){
+  const title=document.getElementById('lg-title').value.trim();if(!title)return;
+  const icon=document.querySelector('#lg-icon-picker .chip.selected')?.dataset.icon||'🎯';
+  S.lifegoals.push({id:uid(),title,desc:document.getElementById('lg-desc').value.trim(),cat:document.getElementById('lg-cat').value,date:document.getElementById('lg-date').value,icon,status:'active',progress:''});
+  closeModal('lifegoalModal');document.getElementById('lg-title').value='';document.getElementById('lg-desc').value='';
+  save();renderLifeGoals();
+}
+function deleteLifeGoal(id){S.lifegoals=S.lifegoals.filter(g=>g.id!==id);save();renderLifeGoals();}
+function toggleLifeGoalStatus(id){const g=S.lifegoals.find(x=>x.id===id);if(g){g.status=g.status==='active'?'achieved':'active';save();renderLifeGoals();}}
+function updateLifeGoalProgress(id,val){const g=S.lifegoals.find(x=>x.id===id);if(g){g.progress=val;save();}}
+function renderLifeGoals(){
+  const el=document.getElementById('lifegoal-list');if(!el)return;
+  if(!S.lifegoals.length){el.innerHTML='<div class="empty-state"><i class="ti ti-target"></i>No life goals yet — add one!</div>';return;}
+  const active=S.lifegoals.filter(g=>g.status==='active');
+  const achieved=S.lifegoals.filter(g=>g.status==='achieved');
+  el.innerHTML=`${active.length?`<h3 style="margin-bottom:0.75rem">Active (${active.length})</h3>${active.map(g=>goalCard(g)).join('')}`:''}
+  ${achieved.length?`<h3 style="margin:1rem 0 0.75rem">Achieved 🎉 (${achieved.length})</h3>${achieved.map(g=>goalCard(g)).join('')}`:''}`;
+}
+function goalCard(g){return`<div class="card" style="margin-bottom:0.75rem;opacity:${g.status==='achieved'?0.8:1}">
+  <div style="display:flex;align-items:flex-start;gap:12px">
+    <span style="font-size:28px">${g.icon}</span>
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span style="font-weight:700;font-size:15px">${g.title}</span>
+        <span class="badge ${g.status==='achieved'?'badge-green':'badge-accent'}">${g.status==='achieved'?'Achieved':'Active'}</span>
+        <span class="badge badge-blue">${g.cat}</span>
+      </div>
+      ${g.desc?`<div style="font-size:13px;color:var(--muted);margin-bottom:6px">${g.desc}</div>`:''}
+      ${g.date?`<div style="font-size:11px;color:var(--muted);margin-bottom:6px">Target: ${g.date}</div>`:''}
+      <input type="text" placeholder="Add a progress note..." value="${g.progress||''}" oninput="updateLifeGoalProgress('${g.id}',this.value)" onblur="save()" style="font-size:12px">
+    </div>
+    <div style="display:flex;gap:5px;flex-shrink:0">
+      <button class="btn btn-sm" onclick="toggleLifeGoalStatus('${g.id}')">${g.status==='achieved'?'Reopen':'Mark achieved'}</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteLifeGoal('${g.id}')"><i class="ti ti-trash"></i></button>
+    </div>
+  </div>
+</div>`;}
+
+// ===== WEEKLY REVIEW =====
+function getWeekKey(offset){const d=new Date();d.setDate(d.getDate()-d.getDay()+1+(offset*7));return d.toISOString().slice(0,10);}
+function reviewNav(dir){S.reviewOffset+=dir;save();renderReview();}
+function saveReview(){
+  const key=getWeekKey(S.reviewOffset);
+  S.weeklyReviews[key]={well:document.getElementById('review-well').value,bad:document.getElementById('review-bad').value,focus:document.getElementById('review-focus').value,saved:today()};
+  save();renderReview();showSaveBadge('Review saved ✓');
+}
+function renderReview(){
+  const key=getWeekKey(S.reviewOffset);
+  const label=new Date(key+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('review-week-label').textContent=label;
+  const rev=S.weeklyReviews[key]||{};
+  document.getElementById('review-well').value=rev.well||'';
+  document.getElementById('review-bad').value=rev.bad||'';
+  document.getElementById('review-focus').value=rev.focus||'';
+  const histEl=document.getElementById('review-history');if(!histEl)return;
+  const keys=Object.keys(S.weeklyReviews).sort().reverse().slice(0,5);
+  if(!keys.length){histEl.innerHTML='<div style="color:var(--muted);font-size:13px">No past reviews yet</div>';return;}
+  histEl.innerHTML=keys.map(k=>{const r=S.weeklyReviews[k];const lbl=new Date(k+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+    return`<div style="border:0.5px solid var(--border);border-radius:var(--radius);padding:0.75rem;margin-bottom:0.5rem;cursor:pointer" onclick="S.reviewOffset=${getOffsetForKey(k)};renderReview()">
+      <div style="font-weight:600;margin-bottom:4px">Week of ${lbl}</div>
+      ${r.well?`<div style="font-size:12px;color:var(--green)">✅ ${r.well.slice(0,60)}${r.well.length>60?'…':''}</div>`:''}
+    </div>`;}).join('');
+}
+function getOffsetForKey(key){const d=new Date();d.setDate(d.getDate()-d.getDay()+1);const target=new Date(key+'T12:00:00');const diff=Math.round((target-d)/(7*864e5));return diff;}
+
+// ===== NOTES =====
+function createNote(){
+  const title=document.getElementById('note-title').value.trim();if(!title)return;
+  const note={id:uid(),title,content:'',created:today(),updated:today()};
+  S.notes.push(note);S.currentNote=note.id;
+  closeModal('noteModal');document.getElementById('note-title').value='';
+  save();renderNotes();
+}
+function deleteNote(id){S.notes=S.notes.filter(n=>n.id!==id);if(S.currentNote===id)S.currentNote=S.notes[0]?.id||null;save();renderNotes();}
+function selectNote(id){S.currentNote=id;renderNotes();}
+function saveNoteContent(id,val){const n=S.notes.find(x=>x.id===id);if(n){n.content=val;n.updated=today();save();}}
+function renderNotes(){
+  const tabsEl=document.getElementById('note-tabs');if(!tabsEl)return;
+  tabsEl.innerHTML=S.notes.map(n=>`<button class="btn ${S.currentNote===n.id?'btn-accent':''}" onclick="selectNote('${n.id}')">${n.title}</button>`).join('');
+  const content=document.getElementById('note-content');if(!content)return;
+  if(!S.notes.length){content.innerHTML='<div class="empty-state"><i class="ti ti-notes"></i>Create a note to get started</div>';return;}
+  const note=S.notes.find(x=>x.id===S.currentNote)||S.notes[0];
+  if(!note){content.innerHTML='';return;}
+  content.innerHTML=`<div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <h2 style="margin:0">${note.title}</h2>
+      <div style="display:flex;gap:6px">
+        <span style="font-size:11px;color:var(--muted)">Updated ${note.updated}</span>
+        <button class="btn btn-danger btn-sm" onclick="deleteNote('${note.id}')"><i class="ti ti-trash"></i>Delete</button>
+      </div>
+    </div>
+    <textarea style="width:100%;min-height:350px;border:0.5px solid var(--border);border-radius:9px;padding:1rem;font-size:14px;line-height:1.6;resize:vertical;background:var(--bg);color:var(--text)" placeholder="Start writing..." oninput="saveNoteContent('${note.id}',this.value)" onblur="save()">${note.content}</textarea>
+  </div>`;
 }
 
 // ===== ACHIEVEMENTS =====
@@ -1178,15 +1609,11 @@ function saveAchievement(){
 function deleteAchievement(id){S.achievements=S.achievements.filter(a=>a.id!==id);save();renderAchievements();}
 function renderAchievements(){
   const el=document.getElementById('ach-list');if(!el)return;
-  if(!S.achievements.length){el.innerHTML='<div class="empty-state"><i class="ti ti-trophy"></i>No achievements yet — log your first!</div>';return;}
-  const sorted=[...S.achievements].sort((a,b)=>b.date.localeCompare(a.date));
-  el.innerHTML=sorted.map(a=>`<div class="ach-card" style="margin-bottom:0.75rem">
-    <div class="ach-icon">${a.icon}</div>
+  if(!S.achievements.length){el.innerHTML='<div class="empty-state"><i class="ti ti-trophy"></i>No achievements yet</div>';return;}
+  el.innerHTML=[...S.achievements].sort((a,b)=>b.date.localeCompare(a.date)).map(a=>`<div class="ach-card">
+    <div style="font-size:28px">${a.icon}</div>
     <div style="flex:1">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-        <span style="font-weight:600;font-size:14px">${a.title}</span>
-        <span class="badge badge-accent">${a.cat}</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-weight:700;font-size:14px">${a.title}</span><span class="badge badge-accent">${a.cat}</span></div>
       ${a.desc?`<div style="font-size:13px;color:var(--muted);margin-bottom:4px">${a.desc}</div>`:''}
       <div style="font-size:11px;color:var(--muted)">${a.date}</div>
     </div>
@@ -1196,12 +1623,10 @@ function renderAchievements(){
 
 // ===== LINKS =====
 function saveLink(){
-  const name=document.getElementById('link-name').value.trim();
-  let url=document.getElementById('link-url').value.trim();if(!name||!url)return;
+  const name=document.getElementById('link-name').value.trim();let url=document.getElementById('link-url').value.trim();if(!name||!url)return;
   if(!url.startsWith('http'))url='https://'+url;
   const icon=document.querySelector('#link-icon-picker .chip.selected')?.dataset.icon||'🔗';
-  if(S.editingLinkId){const l=S.links.find(x=>x.id===S.editingLinkId);if(l){l.name=name;l.url=url;l.icon=icon;}S.editingLinkId=null;document.getElementById('linkModalTitle').textContent='Add link';}
-  else S.links.push({id:uid(),name,url,icon});
+  S.links.push({id:uid(),name,url,icon});
   closeModal('linkModal');document.getElementById('link-name').value='';document.getElementById('link-url').value='';
   save();renderLinks();
 }
@@ -1212,10 +1637,7 @@ function renderLinks(){
   el.innerHTML=S.links.map(l=>`<div style="position:relative">
     <a href="${l.url}" target="_blank" class="link-card">
       <span style="font-size:24px">${l.icon}</span>
-      <div>
-        <div style="font-weight:600;font-size:13px">${l.name}</div>
-        <div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">${l.url.replace('https://','')}</div>
-      </div>
+      <div><div style="font-weight:600;font-size:13px">${l.name}</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:130px">${l.url.replace('https://','')}</div></div>
     </a>
     <button class="btn btn-danger btn-sm" style="position:absolute;top:6px;right:6px;padding:3px 6px" onclick="deleteLink('${l.id}')"><i class="ti ti-trash"></i></button>
   </div>`).join('');
@@ -1228,7 +1650,6 @@ function renderDashboard(){
   const doneToday=todayHabs.filter(h=>(S.habitLogs[h.id]||{})[td]).length;
   const mn=td.slice(0,7);
   const spend=S.transactions.filter(t=>t.type==='expense'&&t.date.startsWith(mn)).reduce((s,t)=>s+t.amount,0);
-  // Greeting
   const hour=new Date().getHours();
   const tod=hour<12?'Morning':hour<18?'Afternoon':'Evening';
   document.getElementById('dash-greeting').textContent='Good '+tod+', Charlie 👋';
@@ -1239,7 +1660,7 @@ function renderDashboard(){
     <div class="metric"><div class="metric-label">Open tasks</div><div class="metric-value">${S.tasks.length}</div></div>
     <div class="metric"><div class="metric-label">Month spending</div><div class="metric-value">${fmtGBP0(spend)}</div></div>`;
   const fEl=document.getElementById('dash-finance-snapshot');
-  if(fEl)fEl.innerHTML=!S.accounts.length?`<div style="color:var(--muted);font-size:13px">No accounts yet</div>`:
+  if(fEl)fEl.innerHTML=!S.accounts.length?'<div style="color:var(--muted);font-size:13px">No accounts yet</div>':
     `<table><tbody>${S.accounts.slice(0,5).map(a=>`<tr><td>${a.name}</td><td style="text-align:right;font-weight:600">${fmtGBP(a.balance)}</td></tr>`).join('')}
     ${S.investments.length?`<tr><td style="color:var(--muted)">Investments</td><td style="text-align:right;font-weight:600">${fmtGBP0(S.investments.reduce((s,i)=>s+i.value,0))}</td></tr>`:''}</tbody></table>`;
   const hEl=document.getElementById('dash-habits-snapshot');
@@ -1266,14 +1687,16 @@ function renderDashboard(){
         ${l?`<span style="font-size:11px;color:var(--muted)">${l.icon}</span>`:''}</div>`;}).join('');
 }
 
-function renderAll(){renderDashboard();renderFinance();renderTransactions();renderSubscriptions();renderHabits();renderTodos();renderAchievements();renderLinks();}
+function renderAll(){
+  renderDashboard();renderFinance();renderTransactions();renderBudget();renderDebt();renderBills();renderSubscriptions();
+  renderHealth();renderMood();renderHabits();renderTodos();renderLifeGoals();renderReview();renderNotes();renderAchievements();renderLinks();
+  renderWorkoutTab(S.workoutTab||'log');
+}
 load();
 </script>
 <script>
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('/life-dashboard/sw.js')
-    .then(()=>console.log('SW registered'))
-    .catch(e=>console.warn('SW failed',e));
+  navigator.serviceWorker.register('/life-dashboard/sw.js').catch(e=>console.warn('SW failed',e));
 }
 </script>
 </body>
